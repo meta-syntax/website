@@ -12,8 +12,8 @@
         <div class="mx-auto max-w-4xl">
           <div class="flex flex-col items-center text-center lg:flex-row lg:text-left lg:items-start lg:gap-12">
             <!-- Avatar -->
-            <div class="hero-avatar mb-8 lg:mb-0 flex-shrink-0">
-              <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 p-1 shadow-lg ring-4 ring-cyan-500/20 dark:ring-cyan-500/30">
+            <div class="hero-avatar mb-8 lg:mb-0 shrink-0">
+              <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-linear-to-br from-cyan-500 to-blue-600 p-1 shadow-lg ring-4 ring-cyan-500/20 dark:ring-cyan-500/30">
                 <div class="w-full h-full rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
                   <UIcon
                     name="i-lucide-user"
@@ -25,40 +25,25 @@
 
             <!-- Content -->
             <div class="flex-1 hero-content">
-              <div class="hero-company mb-4">
-                <span class="text-sm sm:text-base font-semibold tracking-wider text-cyan-600 dark:text-cyan-400 uppercase">
-                  MetaSyntax
+              <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl leading-tight">
+                <span class="block hero-title-line-1">
+                  あなたの<span class="text-cyan-600 dark:text-cyan-400">アイデア</span>を、
                 </span>
-              </div>
-              <h1 class="text-5xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl lg:text-7xl">
-                <span class="block hero-title-line-1">フリーランス</span>
-                <span class="block bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent hero-title-line-2">
-                  ソフトウェアエンジニア
+                <span class="block hero-title-line-2">
+                  一緒に形に
                 </span>
               </h1>
-              <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300 sm:text-xl hero-description">
-                高品質なソフトウェア開発サービスを提供します。<br>
-                モダンな技術スタックで、あなたのビジネスを次のレベルへ。
+              <p class="mt-8 text-lg leading-relaxed text-gray-600 dark:text-gray-300 sm:text-xl hero-description">
+                経験豊富なフリーランスエンジニアとして、お手伝いします
               </p>
-              <div class="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-x-6 gap-y-4 hero-buttons">
+              <div class="mt-10 flex items-center justify-center lg:justify-start hero-buttons">
                 <UButton
                   size="xl"
                   color="primary"
-                  trailing-icon="i-lucide-arrow-right"
                   aria-label="お問い合わせセクションへスクロール"
                   @click="scrollToContact"
                 >
-                  お問い合わせ
-                </UButton>
-                <UButton
-                  size="xl"
-                  color="neutral"
-                  variant="ghost"
-                  trailing-icon="i-lucide-arrow-down"
-                  aria-label="サービスセクションへスクロール"
-                  @click="scrollToServices"
-                >
-                  サービスを見る
+                  相談する
                 </UButton>
               </div>
             </div>
@@ -90,6 +75,29 @@
       </UContainer>
     </section>
 
+    <!-- About Section -->
+    <section
+      id="about"
+      class="py-24 sm:py-32"
+      aria-labelledby="about-heading"
+    >
+      <UContainer>
+        <div class="mx-auto max-w-2xl text-center mb-16">
+          <h2
+            id="about-heading"
+            class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl"
+          >
+            自己紹介
+          </h2>
+          <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">
+            フリーランスエンジニアとして、お客様のプロジェクトを成功に導きます
+          </p>
+        </div>
+
+        <AboutSection />
+      </UContainer>
+    </section>
+
     <!-- Services Section -->
     <section
       id="services"
@@ -117,7 +125,7 @@
             :aria-label="`${service.title}の詳細`"
           >
             <template #header>
-              <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 mb-4 shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
+              <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-linear-to-br from-cyan-500 to-blue-600 mb-4 shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
                 <UIcon
                   :name="service.icon"
                   class="w-7 h-7 text-white"
@@ -155,7 +163,7 @@
             </p>
           </div>
 
-          <div class="grid md:grid-cols-2 gap-8">
+          <div class="grid md:grid-cols-2 gap-8 items-start">
             <!-- Contact Info -->
             <UCard>
               <template #header>
@@ -163,59 +171,29 @@
                   連絡先
                 </h3>
               </template>
-              <div class="space-y-4">
+              <div class="space-y-4 mb-6">
                 <a
-                  href="mailto:contact@example.com"
+                  href="mailto:souta.k@meta-syntax.biz"
                   class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
                   aria-label="メールで連絡する"
                 >
-                  <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 group-hover:scale-110 transition-transform">
+                  <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-linear-to-br from-cyan-500 to-blue-600 group-hover:scale-110 transition-transform">
                     <UIcon
                       name="i-lucide-mail"
                       class="w-5 h-5 text-white"
                     />
                   </div>
                   <span class="text-lg text-gray-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
-                    contact@example.com
+                    souta.k@meta-syntax.biz
                   </span>
                 </a>
               </div>
-              <template #footer>
-                <div class="pt-4 border-t border-gray-200 dark:border-gray-800">
-                  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                    ソーシャルメディア
-                  </p>
-                  <div class="flex gap-3">
-                    <UButton
-                      to="https://github.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      icon="i-simple-icons-github"
-                      color="neutral"
-                      variant="ghost"
-                      aria-label="GitHubプロフィールを開く"
-                    />
-                    <UButton
-                      to="https://linkedin.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      icon="i-simple-icons-linkedin"
-                      color="neutral"
-                      variant="ghost"
-                      aria-label="LinkedInプロフィールを開く"
-                    />
-                    <UButton
-                      to="https://twitter.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      icon="i-simple-icons-x"
-                      color="neutral"
-                      variant="ghost"
-                      aria-label="Twitterプロフィールを開く"
-                    />
-                  </div>
-                </div>
-              </template>
+              <div class="pt-6 border-t border-gray-200 dark:border-gray-800">
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  ソーシャルメディア
+                </p>
+                <SocialMediaButtons />
+              </div>
             </UCard>
 
             <!-- Contact Form -->
@@ -226,47 +204,63 @@
                 </h3>
               </template>
               <form
-                class="space-y-4"
+                class="space-y-5"
                 @submit.prevent="handleSubmit"
               >
-                <UFormGroup
-                  label="お名前"
-                  name="name"
-                  required
-                >
+                <div class="space-y-2">
+                  <label
+                    for="name"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    お名前
+                  </label>
                   <UInput
+                    id="name"
                     v-model="formState.name"
                     placeholder="山田 太郎"
+                    size="lg"
+                    class="w-full"
                     required
                   />
-                </UFormGroup>
-                <UFormGroup
-                  label="メールアドレス"
-                  name="email"
-                  required
-                >
+                </div>
+                <div class="space-y-2">
+                  <label
+                    for="email"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    メールアドレス
+                  </label>
                   <UInput
+                    id="email"
                     v-model="formState.email"
                     type="email"
                     placeholder="your@email.com"
+                    size="lg"
+                    class="w-full"
                     required
                   />
-                </UFormGroup>
-                <UFormGroup
-                  label="メッセージ"
-                  name="message"
-                  required
-                >
+                </div>
+                <div class="space-y-2">
+                  <label
+                    for="message"
+                    class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    メッセージ
+                  </label>
                   <UTextarea
+                    id="message"
                     v-model="formState.message"
                     placeholder="プロジェクトの詳細をご記入ください..."
                     :rows="5"
+                    size="lg"
+                    class="w-full"
                     required
                   />
-                </UFormGroup>
+                </div>
                 <UButton
                   type="submit"
                   color="primary"
+                  size="lg"
                   block
                   :loading="isSubmitting"
                   trailing-icon="i-lucide-send"
@@ -292,35 +286,7 @@
               © {{ new Date().getFullYear() }} MetaSyntax. All rights reserved.
             </p>
           </div>
-          <div class="flex gap-4">
-            <UButton
-              to="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              icon="i-simple-icons-github"
-              color="neutral"
-              variant="ghost"
-              aria-label="GitHub"
-            />
-            <UButton
-              to="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              icon="i-simple-icons-linkedin"
-              color="neutral"
-              variant="ghost"
-              aria-label="LinkedIn"
-            />
-            <UButton
-              to="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              icon="i-simple-icons-x"
-              color="neutral"
-              variant="ghost"
-              aria-label="Twitter"
-            />
-          </div>
+          <SocialMediaButtons />
         </div>
       </UContainer>
     </footer>
@@ -328,8 +294,6 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-
 const services = [
   {
     title: 'Web開発',
@@ -364,12 +328,6 @@ const isSubmitting = ref(false)
 const scrollToContact = () => {
   if (import.meta.client) {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-  }
-}
-
-const scrollToServices = () => {
-  if (import.meta.client) {
-    document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })
   }
 }
 
@@ -408,12 +366,6 @@ onMounted(() => {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 0.8s ease-out 0.6s forwards;
-}
-
-.hero-company {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s ease-out 0.3s forwards;
 }
 
 .hero-description {

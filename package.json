@@ -1,9 +1,9 @@
 {
-  "name": "metasyntax-landing-page",
+  "name": "metasyntax-website",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
+    "build": "n uxt build",
     "dev": "nuxt dev --host",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
