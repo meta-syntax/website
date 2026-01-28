@@ -1,74 +1,74 @@
 <template>
   <div
-    class="min-h-screen bg-white dark:bg-gray-950"
+    class="min-h-screen bg-[#0a0a0a]"
     role="main"
   >
     <!-- Hero Section -->
     <section
-      class="relative overflow-hidden py-24 sm:py-32 lg:py-40"
+      class="relative min-h-screen flex items-center"
       aria-label="ヒーローセクション"
     >
-      <UContainer class="relative z-10">
-        <div class="mx-auto max-w-4xl">
-          <div class="flex flex-col items-center text-center lg:flex-row lg:text-left lg:items-start lg:gap-12">
-            <!-- Avatar -->
-            <div class="hero-avatar mb-8 lg:mb-0 shrink-0">
-              <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-linear-to-br from-cyan-500 to-blue-600 p-1 shadow-lg ring-4 ring-cyan-500/20 dark:ring-cyan-500/30">
-                <div class="w-full h-full rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
-                  <UIcon
-                    name="i-lucide-user"
-                    class="w-16 h-16 sm:w-20 sm:h-20 text-gray-400 dark:text-gray-600"
-                  />
-                </div>
-              </div>
-            </div>
+      <!-- グリッド背景 -->
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(34,197,94,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(34,197,94,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
+      
+      <UContainer class="relative z-10 py-20">
+        <div class="max-w-3xl">
+          <!-- ステータスバッジ -->
+          <div class="hero-eyebrow flex items-center gap-2 mb-8">
+            <span class="w-2 h-2 bg-[#22c55e] rounded-full animate-pulse" />
+            <span class="text-sm text-[#22c55e] font-mono tracking-wide">AVAILABLE FOR WORK</span>
+          </div>
 
-            <!-- Content -->
-            <div class="flex-1 hero-content">
-              <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl lg:text-6xl leading-tight">
-                <span class="block hero-title-line-1">
-                  あなたの<span class="text-cyan-600 dark:text-cyan-400">アイデア</span>を、
-                </span>
-                <span class="block hero-title-line-2">
-                  一緒に形に
-                </span>
-              </h1>
-              <p class="mt-8 text-lg leading-relaxed text-gray-600 dark:text-gray-300 sm:text-xl hero-description">
-                経験豊富なフリーランスエンジニアとして、お手伝いします
-              </p>
-              <div class="mt-10 flex items-center justify-center lg:justify-start hero-buttons">
-                <UButton
-                  size="xl"
-                  color="primary"
-                  aria-label="お問い合わせセクションへスクロール"
-                  @click="scrollToContact"
-                >
-                  相談する
-                </UButton>
-              </div>
-            </div>
+          <!-- メインタイトル -->
+          <h1 class="hero-title text-5xl sm:text-6xl lg:text-7xl font-bold text-[#e8e8e8] leading-[1.1] tracking-tight">
+            ソフトウェアで<br>
+            <span class="text-[#22c55e]">問題</span>を解決する
+          </h1>
+
+          <p class="hero-description mt-8 text-lg sm:text-xl text-[#a0a0a0] max-w-xl leading-relaxed">
+            8年の経験を持つフリーランスエンジニア。<br>
+            Vue.js / Nuxt を中心に、設計から実装まで。
+          </p>
+
+          <!-- CTA -->
+          <div class="hero-buttons mt-12 flex flex-wrap gap-4">
+            <button
+              class="px-8 py-4 bg-[#22c55e] text-[#0a0a0a] font-semibold rounded-none hover:bg-[#16a34a] transition-colors"
+              @click="scrollToContact"
+            >
+              仕事の相談をする
+            </button>
+            <button
+              class="px-8 py-4 border border-[#2a2a2a] text-[#e8e8e8] font-semibold rounded-none hover:border-[#22c55e] hover:text-[#22c55e] transition-colors"
+              @click="scrollToAbout"
+            >
+              詳しく見る
+            </button>
           </div>
         </div>
       </UContainer>
+
+      <!-- スクロールインジケーター -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <div class="w-px h-16 bg-gradient-to-b from-[#22c55e] to-transparent" />
+      </div>
     </section>
 
     <!-- Tech Stack Section -->
     <section
       id="tech-stack"
-      class="py-24 sm:py-32 bg-gray-50 dark:bg-gray-900/50"
+      class="py-32 border-t border-[#1a1a1a]"
       aria-labelledby="tech-stack-heading"
     >
       <UContainer>
-        <div class="mx-auto max-w-2xl text-center mb-16">
+        <div class="mb-16">
+          <span class="text-sm font-mono text-[#22c55e] tracking-wider">01 / SKILLS</span>
           <h2
             id="tech-stack-heading"
-            class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl"
+            class="mt-4 text-3xl sm:text-4xl font-bold text-[#e8e8e8]"
           >
             技術スタック
           </h2>
-          <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">
-            最新のテクノロジーを活用して、スケーラブルで保守性の高いソリューションを構築します
-          </p>
         </div>
 
         <TechStack />
@@ -78,20 +78,18 @@
     <!-- About Section -->
     <section
       id="about"
-      class="py-24 sm:py-32"
+      class="py-32 border-t border-[#1a1a1a]"
       aria-labelledby="about-heading"
     >
       <UContainer>
-        <div class="mx-auto max-w-2xl text-center mb-16">
+        <div class="mb-16">
+          <span class="text-sm font-mono text-[#22c55e] tracking-wider">02 / ABOUT</span>
           <h2
             id="about-heading"
-            class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl"
+            class="mt-4 text-3xl sm:text-4xl font-bold text-[#e8e8e8]"
           >
             自己紹介
           </h2>
-          <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">
-            フリーランスエンジニアとして、お客様のプロジェクトを成功に導きます
-          </p>
         </div>
 
         <AboutSection />
@@ -101,44 +99,38 @@
     <!-- Services Section -->
     <section
       id="services"
-      class="py-24 sm:py-32"
+      class="py-32 border-t border-[#1a1a1a]"
       aria-labelledby="services-heading"
     >
       <UContainer>
-        <div class="mx-auto max-w-2xl text-center mb-16">
+        <div class="mb-16">
+          <span class="text-sm font-mono text-[#22c55e] tracking-wider">03 / SERVICES</span>
           <h2
             id="services-heading"
-            class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl"
+            class="mt-4 text-3xl sm:text-4xl font-bold text-[#e8e8e8]"
           >
-            サービス・専門性
+            サービス
           </h2>
-          <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">
-            お客様のニーズに合わせた柔軟な開発サービスを提供します
-          </p>
         </div>
 
-        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <UCard
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-px bg-[#1a1a1a]">
+          <div
             v-for="(service, index) in services"
             :key="index"
-            class="service-card group"
-            :aria-label="`${service.title}の詳細`"
+            class="group p-8 bg-[#0a0a0a] hover:bg-[#111] transition-colors"
           >
-            <template #header>
-              <div class="flex items-center justify-center w-14 h-14 rounded-xl bg-linear-to-br from-cyan-500 to-blue-600 mb-4 shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
-                <UIcon
-                  :name="service.icon"
-                  class="w-7 h-7 text-white"
-                />
+            <div class="flex items-start gap-4">
+              <span class="text-sm font-mono text-[#404040]">0{{ index + 1 }}</span>
+              <div>
+                <h3 class="text-xl font-semibold text-[#e8e8e8] mb-3 group-hover:text-[#22c55e] transition-colors">
+                  {{ service.title }}
+                </h3>
+                <p class="text-[#a0a0a0] leading-relaxed">
+                  {{ service.description }}
+                </p>
               </div>
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
-                {{ service.title }}
-              </h3>
-            </template>
-            <p class="text-gray-600 dark:text-gray-300">
-              {{ service.description }}
-            </p>
-          </UCard>
+            </div>
+          </div>
         </div>
       </UContainer>
     </section>
@@ -146,146 +138,118 @@
     <!-- Contact Section -->
     <section
       id="contact"
-      class="py-24 sm:py-32 bg-gray-50 dark:bg-gray-900/50"
+      class="py-32 border-t border-[#1a1a1a]"
       aria-labelledby="contact-heading"
     >
       <UContainer>
-        <div class="mx-auto max-w-3xl">
-          <div class="text-center mb-12">
-            <h2
-              id="contact-heading"
-              class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl"
-            >
-              お問い合わせ
-            </h2>
-            <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">
-              プロジェクトのご相談やお見積もりは、お気軽にお問い合わせください
+        <div class="mb-16">
+          <span class="text-sm font-mono text-[#22c55e] tracking-wider">04 / CONTACT</span>
+          <h2
+            id="contact-heading"
+            class="mt-4 text-3xl sm:text-4xl font-bold text-[#e8e8e8]"
+          >
+            お問い合わせ
+          </h2>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-16">
+          <!-- Contact Info -->
+          <div>
+            <p class="text-[#a0a0a0] text-lg leading-relaxed mb-8">
+              プロジェクトのご相談、お見積もりなど<br>
+              お気軽にご連絡ください。
             </p>
+            
+            <a
+              href="mailto:souta.k@meta-syntax.biz"
+              class="inline-flex items-center gap-3 text-[#e8e8e8] hover:text-[#22c55e] transition-colors group"
+            >
+              <span class="w-10 h-10 flex items-center justify-center border border-[#2a2a2a] group-hover:border-[#22c55e] transition-colors">
+                <UIcon name="i-lucide-mail" class="w-5 h-5" />
+              </span>
+              <span class="text-lg">souta.k@meta-syntax.biz</span>
+            </a>
+
+            <div class="mt-8 pt-8 border-t border-[#1a1a1a]">
+              <p class="text-sm text-[#606060] mb-4 font-mono">SOCIAL</p>
+              <SocialMediaButtons />
+            </div>
           </div>
 
-          <div class="grid md:grid-cols-2 gap-8 items-start">
-            <!-- Contact Info -->
-            <UCard>
-              <template #header>
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                  連絡先
-                </h3>
-              </template>
-              <div class="space-y-4 mb-6">
-                <a
-                  href="mailto:souta.k@meta-syntax.biz"
-                  class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
-                  aria-label="メールで連絡する"
+          <!-- Contact Form -->
+          <div class="bg-[#111] p-8">
+            <form
+              class="space-y-6"
+              @submit.prevent="handleSubmit"
+            >
+              <div>
+                <label
+                  for="name"
+                  class="block text-sm font-mono text-[#606060] mb-2"
                 >
-                  <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-linear-to-br from-cyan-500 to-blue-600 group-hover:scale-110 transition-transform">
-                    <UIcon
-                      name="i-lucide-mail"
-                      class="w-5 h-5 text-white"
-                    />
-                  </div>
-                  <span class="text-lg text-gray-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
-                    souta.k@meta-syntax.biz
-                  </span>
-                </a>
+                  NAME
+                </label>
+                <input
+                  id="name"
+                  v-model="formState.name"
+                  type="text"
+                  placeholder="山田 太郎"
+                  class="w-full px-4 py-3 bg-[#0a0a0a] border border-[#2a2a2a] text-[#e8e8e8] placeholder-[#404040] focus:border-[#22c55e] focus:outline-none transition-colors"
+                  required
+                />
               </div>
-              <div class="pt-6 border-t border-gray-200 dark:border-gray-800">
-                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                  ソーシャルメディア
-                </p>
-                <SocialMediaButtons />
+              <div>
+                <label
+                  for="email"
+                  class="block text-sm font-mono text-[#606060] mb-2"
+                >
+                  EMAIL
+                </label>
+                <input
+                  id="email"
+                  v-model="formState.email"
+                  type="email"
+                  placeholder="your@email.com"
+                  class="w-full px-4 py-3 bg-[#0a0a0a] border border-[#2a2a2a] text-[#e8e8e8] placeholder-[#404040] focus:border-[#22c55e] focus:outline-none transition-colors"
+                  required
+                />
               </div>
-            </UCard>
-
-            <!-- Contact Form -->
-            <UCard>
-              <template #header>
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                  メッセージを送る
-                </h3>
-              </template>
-              <form
-                class="space-y-5"
-                @submit.prevent="handleSubmit"
+              <div>
+                <label
+                  for="message"
+                  class="block text-sm font-mono text-[#606060] mb-2"
+                >
+                  MESSAGE
+                </label>
+                <textarea
+                  id="message"
+                  v-model="formState.message"
+                  rows="5"
+                  placeholder="プロジェクトの詳細をご記入ください..."
+                  class="w-full px-4 py-3 bg-[#0a0a0a] border border-[#2a2a2a] text-[#e8e8e8] placeholder-[#404040] focus:border-[#22c55e] focus:outline-none transition-colors resize-none"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                class="w-full px-8 py-4 bg-[#22c55e] text-[#0a0a0a] font-semibold hover:bg-[#16a34a] transition-colors disabled:opacity-50"
+                :disabled="isSubmitting"
               >
-                <div class="space-y-2">
-                  <label
-                    for="name"
-                    class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >
-                    お名前
-                  </label>
-                  <UInput
-                    id="name"
-                    v-model="formState.name"
-                    placeholder="山田 太郎"
-                    size="lg"
-                    class="w-full"
-                    required
-                  />
-                </div>
-                <div class="space-y-2">
-                  <label
-                    for="email"
-                    class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >
-                    メールアドレス
-                  </label>
-                  <UInput
-                    id="email"
-                    v-model="formState.email"
-                    type="email"
-                    placeholder="your@email.com"
-                    size="lg"
-                    class="w-full"
-                    required
-                  />
-                </div>
-                <div class="space-y-2">
-                  <label
-                    for="message"
-                    class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >
-                    メッセージ
-                  </label>
-                  <UTextarea
-                    id="message"
-                    v-model="formState.message"
-                    placeholder="プロジェクトの詳細をご記入ください..."
-                    :rows="5"
-                    size="lg"
-                    class="w-full"
-                    required
-                  />
-                </div>
-                <UButton
-                  type="submit"
-                  color="primary"
-                  size="lg"
-                  block
-                  :loading="isSubmitting"
-                  trailing-icon="i-lucide-send"
-                >
-                  送信する
-                </UButton>
-              </form>
-            </UCard>
+                {{ isSubmitting ? '送信中...' : '送信する' }}
+              </button>
+            </form>
           </div>
         </div>
       </UContainer>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 bg-gray-900 dark:bg-black border-t border-gray-800">
+    <footer class="py-8 border-t border-[#1a1a1a]">
       <UContainer>
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div class="text-center md:text-left">
-            <p class="text-lg font-semibold text-white mb-1">
-              MetaSyntax
-            </p>
-            <p class="text-sm text-gray-400">
-              © {{ new Date().getFullYear() }} MetaSyntax. All rights reserved.
-            </p>
-          </div>
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-sm text-[#606060] font-mono">
+            © {{ new Date().getFullYear() }} METASYNTAX
+          </p>
           <SocialMediaButtons />
         </div>
       </UContainer>
@@ -297,23 +261,19 @@
 const services = [
   {
     title: 'Web開発',
-    icon: 'i-lucide-globe',
-    description: 'レスポンシブで高速なWebアプリケーションの開発'
+    description: 'レスポンシブで高速なWebアプリケーションの設計・開発'
   },
   {
     title: 'API開発',
-    icon: 'i-lucide-plug',
-    description: 'RESTful API、GraphQL などのバックエンドAPI開発'
+    description: 'RESTful API、GraphQL などのバックエンド開発'
   },
   {
     title: 'システム設計',
-    icon: 'i-lucide-building-2',
-    description: 'スケーラブルで保守性の高いシステムアーキテクチャ設計'
+    description: 'スケーラブルで保守性の高いアーキテクチャ設計'
   },
   {
-    title: '技術コンサル',
-    icon: 'i-lucide-lightbulb',
-    description: '技術選定や開発プロセスの改善に関するコンサルティング'
+    title: '技術コンサルティング',
+    description: '技術選定や開発プロセスの改善支援'
   }
 ]
 
@@ -331,9 +291,14 @@ const scrollToContact = () => {
   }
 }
 
+const scrollToAbout = () => {
+  if (import.meta.client) {
+    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
+  }
+}
+
 const handleSubmit = async () => {
   isSubmitting.value = true
-  // フォーム送信処理（実際の実装ではAPIエンドポイントに送信）
   await new Promise(resolve => setTimeout(resolve, 1000))
   alert('メッセージを送信しました。ありがとうございます！')
   formState.value = { name: '', email: '', message: '' }
@@ -341,7 +306,6 @@ const handleSubmit = async () => {
 }
 
 onMounted(() => {
-  // ページロード時のアニメーションをトリガー
   if (import.meta.client) {
     document.body.classList.add('page-loaded')
   }
@@ -349,91 +313,43 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Hero Section Animations */
-.hero-avatar {
-  opacity: 0;
-  transform: scale(0.8) translateY(-20px);
-  animation: fadeInUp 0.8s ease-out 0.2s forwards;
-}
-
-.hero-title-line-1 {
+/* Hero Animations */
+.hero-eyebrow {
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeInUp 0.8s ease-out 0.4s forwards;
+  animation: fadeIn 0.6s ease-out 0.1s forwards;
 }
 
-.hero-title-line-2 {
+.hero-title {
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s ease-out 0.6s forwards;
+  transform: translateY(30px);
+  animation: fadeIn 0.6s ease-out 0.2s forwards;
 }
 
 .hero-description {
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s ease-out 0.8s forwards;
+  transform: translateY(30px);
+  animation: fadeIn 0.6s ease-out 0.3s forwards;
 }
 
 .hero-buttons {
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.8s ease-out 1s forwards;
+  transform: translateY(30px);
+  animation: fadeIn 0.6s ease-out 0.4s forwards;
 }
 
-@keyframes fadeInUp {
+@keyframes fadeIn {
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
-/* Service Cards */
-.service-card {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.service-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-.dark .service-card:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-}
-
-/* Section Transitions */
-section {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.page-loaded section {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Stagger animation for sections */
-.page-loaded section:nth-child(1) { transition-delay: 0s; }
-.page-loaded section:nth-child(2) { transition-delay: 0.1s; }
-.page-loaded section:nth-child(3) { transition-delay: 0.2s; }
-.page-loaded section:nth-child(4) { transition-delay: 0.3s; }
-
-/* Performance optimizations */
-.hero-avatar,
-.service-card,
-section {
-  will-change: transform, opacity;
-}
-
-/* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
-  .hero-avatar,
-  .hero-title-line-1,
-  .hero-title-line-2,
+  .hero-eyebrow,
+  .hero-title,
   .hero-description,
-  .hero-buttons,
-  section {
+  .hero-buttons {
     animation: none;
     opacity: 1;
     transform: none;
