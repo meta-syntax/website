@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "n uxt build",
+    "build": "nuxt build",
     "dev": "nuxt dev --host",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
@@ -14,6 +14,7 @@
     "@iconify-json/lucide": "^1.2.82",
     "@iconify-json/simple-icons": "^1.2.63",
     "@nuxt/icon": "^1.7.0",
+    "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4.3.0",
     "nuxt": "^4.2.2"
   },

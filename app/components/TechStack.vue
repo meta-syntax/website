@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const containerRef = ref(null)
@@ -32,7 +32,7 @@ const technologies = [
   { name: 'Redis', percentage: 68 }
 ]
 
-let observer = null
+let observer: IntersectionObserver | null = null
 
 onMounted(() => {
   if (import.meta.client && containerRef.value) {

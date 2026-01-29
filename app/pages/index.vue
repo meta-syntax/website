@@ -9,8 +9,10 @@
       aria-label="ヒーローセクション"
     >
       <!-- グリッド背景 -->
-      <div class="absolute inset-0 bg-[linear-gradient(rgba(34,197,94,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(34,197,94,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
-      
+      <div
+        class="absolute inset-0 bg-[linear-gradient(rgba(34,197,94,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(34,197,94,0.03)_1px,transparent_1px)] bg-size-[60px_60px]"
+      />
+
       <UContainer class="relative z-10 py-20">
         <div class="max-w-3xl">
           <!-- ステータスバッジ -->
@@ -21,8 +23,8 @@
 
           <!-- メインタイトル -->
           <h1 class="hero-title text-5xl sm:text-6xl lg:text-7xl font-bold text-[#e8e8e8] leading-[1.1] tracking-tight">
-            ソフトウェアで<br>
-            <span class="text-[#22c55e]">問題</span>を解決する
+            複雑を<span class="text-[#22c55e]">紐解き</span>、<br>
+            組み上げる
           </h1>
 
           <p class="hero-description mt-8 text-lg sm:text-xl text-[#a0a0a0] max-w-xl leading-relaxed">
@@ -50,7 +52,7 @@
 
       <!-- スクロールインジケーター -->
       <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <div class="w-px h-16 bg-gradient-to-b from-[#22c55e] to-transparent" />
+        <div class="w-px h-16 bg-linear-to-b from-[#22c55e] to-transparent" />
       </div>
     </section>
 
@@ -159,19 +161,26 @@
               プロジェクトのご相談、お見積もりなど<br>
               お気軽にご連絡ください。
             </p>
-            
+
             <a
               href="mailto:souta.k@meta-syntax.biz"
               class="inline-flex items-center gap-3 text-[#e8e8e8] hover:text-[#22c55e] transition-colors group"
             >
-              <span class="w-10 h-10 flex items-center justify-center border border-[#2a2a2a] group-hover:border-[#22c55e] transition-colors">
-                <UIcon name="i-lucide-mail" class="w-5 h-5" />
+              <span
+                class="w-10 h-10 flex items-center justify-center border border-[#2a2a2a] group-hover:border-[#22c55e] transition-colors"
+              >
+                <UIcon
+                  name="i-lucide-mail"
+                  class="w-5 h-5"
+                />
               </span>
               <span class="text-lg">souta.k@meta-syntax.biz</span>
             </a>
 
             <div class="mt-8 pt-8 border-t border-[#1a1a1a]">
-              <p class="text-sm text-[#606060] mb-4 font-mono">SOCIAL</p>
+              <p class="text-sm text-[#606060] mb-4 font-mono">
+                SOCIAL
+              </p>
               <SocialMediaButtons />
             </div>
           </div>
@@ -196,7 +205,7 @@
                   placeholder="山田 太郎"
                   class="w-full px-4 py-3 bg-[#0a0a0a] border border-[#2a2a2a] text-[#e8e8e8] placeholder-[#404040] focus:border-[#22c55e] focus:outline-none transition-colors"
                   required
-                />
+                >
               </div>
               <div>
                 <label
@@ -212,7 +221,7 @@
                   placeholder="your@email.com"
                   class="w-full px-4 py-3 bg-[#0a0a0a] border border-[#2a2a2a] text-[#e8e8e8] placeholder-[#404040] focus:border-[#22c55e] focus:outline-none transition-colors"
                   required
-                />
+                >
               </div>
               <div>
                 <label
@@ -257,7 +266,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const services = [
   {
     title: 'Web開発',
