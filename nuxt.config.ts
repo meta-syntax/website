@@ -12,12 +12,6 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  routeRules: {
-    '/': {
-      prerender: true
-    }
-  },
-
   compatibilityDate: '2025-01-15',
 
   // 静的サイト生成設定
@@ -26,8 +20,7 @@ export default defineNuxtConfig({
       crawlLinks: true,
       routes: ['/']
     },
-    compressPublicAssets: true,
-    minify: true
+    compressPublicAssets: true
   },
 
   // Vite最適化設定
