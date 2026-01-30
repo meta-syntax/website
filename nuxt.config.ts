@@ -14,9 +14,10 @@ export default defineNuxtConfig({
     enabled: true
   },
 
-  // セルフホストフォントを追加
+  // セルフホストフォント（Zen Kaku Gothic New）
   css: [
-    '@fontsource-variable/noto-sans-jp/wght.css',
+    '@fontsource/zen-kaku-gothic-new/400.css',
+    '@fontsource/zen-kaku-gothic-new/700.css',
     '~/assets/css/main.css'
   ],
 
@@ -33,15 +34,7 @@ export default defineNuxtConfig({
   vite: {
     build: {
       cssMinify: true,
-      minify: 'esbuild',
-      // チャンク分割最適化
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            vendor: ['vue', 'vue-router']
-          }
-        }
-      }
+      minify: 'esbuild'
     }
   },
 

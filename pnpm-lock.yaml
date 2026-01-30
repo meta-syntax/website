@@ -8,9 +8,9 @@ importers:
 
   .:
     dependencies:
-      '@fontsource-variable/noto-sans-jp':
-        specifier: ^5.2.10
-        version: 5.2.10
+      '@fontsource/zen-kaku-gothic-new':
+        specifier: ^5.2.7
+        version: 5.2.7
       '@iconify-json/lucide':
         specifier: ^1.2.82
         version: 1.2.82
@@ -616,8 +616,8 @@ packages:
   '@floating-ui/vue@1.1.9':
     resolution: {integrity: sha512-BfNqNW6KA83Nexspgb9DZuz578R7HT8MZw1CfK9I6Ah4QReNWEJsXWHN+SdmOVLNGmTPDi+fDT535Df5PzMLbQ==}
 
-  '@fontsource-variable/noto-sans-jp@5.2.10':
-    resolution: {integrity: sha512-m0XfZ38rZtCaGAuAQL0cBPQ6fc/RguYEOqw66zvuLOV9vNRUBf9MFqyoazTu2JVCRIcnkrxbwF29UUaHHgTKdg==}
+  '@fontsource/zen-kaku-gothic-new@5.2.7':
+    resolution: {integrity: sha512-tfGiyBqeeBjUURHm+RIuBJCxIKhZFp46/+LEc+zCxR4sLslKwlVpWda0ZOnX/mTvOHpfr4DYjiV/pVosRXHWaw==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -5657,7 +5657,7 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@fontsource-variable/noto-sans-jp@5.2.10': {}
+  '@fontsource/zen-kaku-gothic-new@5.2.7': {}
 
   '@humanfs/core@0.19.1': {}
 

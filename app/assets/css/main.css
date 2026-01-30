@@ -2,8 +2,8 @@
 @import "@nuxt/ui";
 
 @theme static {
-  /* セルフホストのNoto Sans JPを使用（軽量・高速） */
-  --font-sans: 'Noto Sans JP Variable', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+  /* Zen Kaku Gothic New を使用 */
+  --font-sans: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
 }
 
 /* ダークモードベース - 黒背景に白文字 */

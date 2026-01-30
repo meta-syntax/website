@@ -13,7 +13,7 @@ useHead({
   ],
   link: [
     { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    // フォントはセルフホスト（@fontsource-variable/noto-sans-jp）に移行
+    // フォントはセルフホスト（@fontsource/zen-kaku-gothic-new）
   ]
 })
 
