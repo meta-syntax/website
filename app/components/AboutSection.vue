@@ -7,6 +7,12 @@
           <NuxtImg
             src="/SNS-icon-2505-162.webp"
             alt="Profile Icon"
+            width="128"
+            height="128"
+            sizes="128px"
+            format="webp"
+            quality="80"
+            loading="lazy"
             class="w-full h-full object-cover"
           />
         </div>
