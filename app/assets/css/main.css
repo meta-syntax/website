@@ -2,8 +2,8 @@
 @import "@nuxt/ui";
 
 @theme static {
-  /* フォールバックフォントを追加してFOUTを軽減 */
-  --font-sans: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+  /* セルフホストのNoto Sans JPを使用（軽量・高速） */
+  --font-sans: 'Noto Sans JP Variable', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
 }
 
 /* ダークモードベース - 黒背景に白文字 */
@@ -16,10 +16,4 @@
   --accent: #22c55e;
   --accent-dim: #16a34a;
   --border: #2a2a2a;
-}
-
-/* フォント読み込み最適化 */
-@font-face {
-  font-family: 'Zen Kaku Gothic New';
-  font-display: swap;
 }

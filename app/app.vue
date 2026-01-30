@@ -12,25 +12,8 @@ useHead({
     { name: 'author', content: 'MetaSyntax' }
   ],
   link: [
-    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-    // Google Fontsを非同期で読み込み（レンダーブロッキング回避）
-    {
-      rel: 'preload',
-      as: 'style',
-      href: 'https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&display=swap'
-    },
-    {
-      rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&display=swap',
-      media: 'print',
-      onload: 'this.media=\'all\''
-    }
-  ],
-  // フォールバック用noscript
-  noscript: [
-    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&display=swap">'
+    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    // フォントはセルフホスト（@fontsource-variable/noto-sans-jp）に移行
   ]
 })
 

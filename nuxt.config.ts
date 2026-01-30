@@ -6,15 +6,19 @@ export default defineNuxtConfig({
     '@nuxt/image'
   ],
 
+  compatibilityDate: '2025-01-15',
+
   ssr: true,
 
   devtools: {
     enabled: true
   },
 
-  css: ['~/assets/css/main.css'],
-
-  compatibilityDate: '2025-01-15',
+  // セルフホストフォントを追加
+  css: [
+    '@fontsource-variable/noto-sans-jp/wght.css',
+    '~/assets/css/main.css'
+  ],
 
   // 静的サイト生成設定
   nitro: {
@@ -29,7 +33,15 @@ export default defineNuxtConfig({
   vite: {
     build: {
       cssMinify: true,
-      minify: 'esbuild'
+      minify: 'esbuild',
+      // チャンク分割最適化
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['vue', 'vue-router']
+          }
+        }
+      }
     }
   },
 
