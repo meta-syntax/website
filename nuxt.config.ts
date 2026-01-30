@@ -48,7 +48,6 @@ export default defineNuxtConfig({
   },
 
   image: {
-    dir: 'public',
     // 画像最適化設定
     quality: 80,
     format: ['webp', 'avif'],

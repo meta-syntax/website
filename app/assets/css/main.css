@@ -17,3 +17,9 @@
   --accent-dim: #16a34a;
   --border: #2a2a2a;
 }
+
+/* UTooltipのborderを無効化 */
+[data-reka-popper-content-wrapper] [data-slot="content"] {
+  border: none !important;
+  box-shadow: none !important;
+}

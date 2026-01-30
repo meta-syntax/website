@@ -12,7 +12,7 @@ useHead({
     { name: 'author', content: 'MetaSyntax' }
   ],
   link: [
-    { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }
     // フォントはセルフホスト（@fontsource/zen-kaku-gothic-new）
   ]
 })

@@ -8,7 +8,7 @@
         {{ tech.name }}
       </span>
       <div class="flex items-center gap-4">
-        <div class="w-48 h-1 bg-[#1a1a1a]">
+        <div class="flex-1 sm:w-48 h-1 bg-[#1a1a1a]">
           <div
             class="h-full bg-[#22c55e] transition-all duration-1000 ease-out"
             :style="{ width: isAnimated ? `${tech.percentage}%` : '0%' }"
