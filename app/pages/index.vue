@@ -269,20 +269,20 @@
 <script setup lang="ts">
 const services = [
   {
-    title: 'Web開発',
-    description: 'レスポンシブで高速なWebアプリケーションの設計・開発'
+    title: 'フロントエンド開発',
+    description: 'Vue.js/Nuxtを使ったモダンなWebアプリケーション開発。コンポーネント設計からパフォーマンス最適化まで対応します。'
   },
   {
-    title: 'API開発',
-    description: 'RESTful API、GraphQL などのバックエンド開発'
+    title: 'UI/UX実装',
+    description: 'デザインシステムの構築やアクセシビリティに配慮したユーザーインターフェースの実装を行います。'
   },
   {
-    title: 'システム設計',
-    description: 'スケーラブルで保守性の高いアーキテクチャ設計'
+    title: '技術選定・設計',
+    description: 'プロジェクトの要件に合わせた技術スタックの選定と、スケーラブルなアーキテクチャの設計を支援します。'
   },
   {
-    title: '技術コンサルティング',
-    description: '技術選定や開発プロセスの改善支援'
+    title: 'パフォーマンス最適化',
+    description: 'Core Web Vitalsの改善やバンドルサイズの削減など、Webアプリケーションの速度向上を実現します。'
   }
 ]
 

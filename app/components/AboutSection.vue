@@ -29,64 +29,94 @@
     <div class="lg:col-span-2 space-y-12">
       <!-- 経歴 -->
       <div class="group">
-        <div class="flex items-center gap-4 mb-4">
-          <span class="text-sm font-mono text-[#404040]">01</span>
+        <div class="flex items-center gap-4 mb-6">
+          <UIcon
+            name="i-lucide-briefcase"
+            class="w-5 h-5 text-[#22c55e]"
+          />
           <h4 class="text-lg font-semibold text-[#e8e8e8]">
             経歴
           </h4>
         </div>
-        <p class="text-[#a0a0a0] leading-relaxed pl-10">
-          8年間の実務経験を通じて、Webアプリケーションから業務システムまで幅広いプロジェクトに携わってきました。チーム開発やクライアントワークの中で、技術力だけでなく、コミュニケーション能力や課題解決力も磨いています。
-        </p>
+        <ul class="pl-9 space-y-3">
+          <li class="flex gap-3">
+            <span class="text-[#22c55e] leading-relaxed">•</span>
+            <span class="text-[#a0a0a0] leading-relaxed">8年間の実務経験を通じて、Webアプリケーションから業務システムまで幅広いプロジェクトに携わる</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-[#22c55e] leading-relaxed">•</span>
+            <span class="text-[#a0a0a0] leading-relaxed">チーム開発とクライアントワークで技術力とコミュニケーション能力を研鑽</span>
+          </li>
+        </ul>
       </div>
 
       <!-- 働き方 -->
       <div class="group">
-        <div class="flex items-center gap-4 mb-4">
-          <span class="text-sm font-mono text-[#404040]">02</span>
+        <div class="flex items-center gap-4 mb-6">
+          <UIcon
+            name="i-lucide-users"
+            class="w-5 h-5 text-[#22c55e]"
+          />
           <h4 class="text-lg font-semibold text-[#e8e8e8]">
             働き方
           </h4>
         </div>
-        <p class="text-[#a0a0a0] leading-relaxed pl-10">
-          企業でのチーム開発を経て、フリーランスエンジニアとして活動しています。小規模ならではの小回りの良さを活かし、迅速な対応と柔軟なコミュニケーションを大切にしています。
-        </p>
+        <ul class="pl-9 space-y-3">
+          <li class="flex gap-3">
+            <span class="text-[#22c55e] leading-relaxed">•</span>
+            <span class="text-[#a0a0a0] leading-relaxed">フリーランスエンジニアとして柔軟な働き方を実現</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-[#22c55e] leading-relaxed">•</span>
+            <span class="text-[#a0a0a0] leading-relaxed">小回りの良さを活かした迅速な対応と密なコミュニケーション</span>
+          </li>
+        </ul>
       </div>
 
       <!-- 専門領域 -->
       <div class="group">
-        <div class="flex items-center gap-4 mb-4">
-          <span class="text-sm font-mono text-[#404040]">03</span>
+        <div class="flex items-center gap-4 mb-6">
+          <UIcon
+            name="i-lucide-code"
+            class="w-5 h-5 text-[#22c55e]"
+          />
           <h4 class="text-lg font-semibold text-[#e8e8e8]">
             専門領域
           </h4>
         </div>
-        <div class="pl-10">
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="px-3 py-1 text-sm border border-[#22c55e] text-[#22c55e]">
-              フロントエンド開発
-            </span>
-            <span class="px-3 py-1 text-sm border border-[#2a2a2a] text-[#a0a0a0]">
-              アーキテクチャ設計
-            </span>
-          </div>
-          <p class="text-[#a0a0a0] leading-relaxed">
-            Vue.js/Nuxtを中心としたモダンなフロントエンド開発と、スケーラブルなシステムアーキテクチャの設計を得意としています。
-          </p>
-        </div>
+        <ul class="pl-9 space-y-3">
+          <li class="flex gap-3">
+            <span class="text-[#22c55e] leading-relaxed">•</span>
+            <span class="text-[#a0a0a0] leading-relaxed">Vue.js / Nuxt を中心としたモダンなフロントエンド開発</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-[#22c55e] leading-relaxed">•</span>
+            <span class="text-[#a0a0a0] leading-relaxed">スケーラブルで保守性の高いアーキテクチャ設計</span>
+          </li>
+        </ul>
       </div>
 
       <!-- 価値観 -->
       <div class="group">
-        <div class="flex items-center gap-4 mb-4">
-          <span class="text-sm font-mono text-[#404040]">04</span>
+        <div class="flex items-center gap-4 mb-6">
+          <UIcon
+            name="i-lucide-heart"
+            class="w-5 h-5 text-[#22c55e]"
+          />
           <h4 class="text-lg font-semibold text-[#e8e8e8]">
             大切にしていること
           </h4>
         </div>
-        <p class="text-[#a0a0a0] leading-relaxed pl-10">
-          <span class="text-[#e8e8e8]">保守性と可読性</span>を重視した開発を心がけています。長期的に運用しやすく、チームメンバーが理解しやすいコードを書くことで、プロジェクトの持続的な成長をサポートします。
-        </p>
+        <ul class="pl-9 space-y-3">
+          <li class="flex gap-3">
+            <span class="text-[#22c55e] leading-relaxed">•</span>
+            <span class="text-[#a0a0a0] leading-relaxed">保守性と可読性を重視した、長期運用に耐えるコード品質</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="text-[#22c55e] leading-relaxed">•</span>
+            <span class="text-[#a0a0a0] leading-relaxed">チーム全体が理解しやすい設計で、プロジェクトの持続的成長を支援</span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
