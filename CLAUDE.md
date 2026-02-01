@@ -2,7 +2,7 @@
 
 ## Tech Stack
 
-- Nuxt 3 + Vue 3
+- Nuxt 4 + Vue 3
 - TypeScript
 - Tailwind CSS
 - Nuxt UI

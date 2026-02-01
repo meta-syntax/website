@@ -98,6 +98,27 @@
       </UContainer>
     </section>
 
+    <!-- Works Section -->
+    <section
+      id="works"
+      class="py-32 border-t border-[#1a1a1a]"
+      aria-labelledby="works-heading"
+    >
+      <UContainer>
+        <div class="mb-16">
+          <span class="text-sm font-mono text-[#22c55e] tracking-wider">03 / WORKS</span>
+          <h2
+            id="works-heading"
+            class="mt-4 text-3xl sm:text-4xl font-bold text-[#e8e8e8]"
+          >
+            個人開発
+          </h2>
+        </div>
+
+        <WorksSection />
+      </UContainer>
+    </section>
+
     <!-- Services Section -->
     <section
       id="services"
@@ -106,7 +127,7 @@
     >
       <UContainer>
         <div class="mb-16">
-          <span class="text-sm font-mono text-[#22c55e] tracking-wider">03 / SERVICES</span>
+          <span class="text-sm font-mono text-[#22c55e] tracking-wider">04 / SERVICES</span>
           <h2
             id="services-heading"
             class="mt-4 text-3xl sm:text-4xl font-bold text-[#e8e8e8]"
@@ -145,7 +166,7 @@
     >
       <UContainer>
         <div class="mb-16">
-          <span class="text-sm font-mono text-[#22c55e] tracking-wider">04 / CONTACT</span>
+          <span class="text-sm font-mono text-[#22c55e] tracking-wider">05 / CONTACT</span>
           <h2
             id="contact-heading"
             class="mt-4 text-3xl sm:text-4xl font-bold text-[#e8e8e8]"
