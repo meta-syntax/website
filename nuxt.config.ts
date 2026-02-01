@@ -6,8 +6,6 @@ export default defineNuxtConfig({
     '@nuxt/image'
   ],
 
-  compatibilityDate: '2025-01-15',
-
   ssr: true,
 
   devtools: {
@@ -20,6 +18,8 @@ export default defineNuxtConfig({
     '@fontsource/zen-kaku-gothic-new/700.css',
     '~/assets/css/main.css'
   ],
+
+  compatibilityDate: '2025-01-15',
 
   // 静的サイト生成設定
   nitro: {
