@@ -210,7 +210,7 @@
           <div class="bg-[#111] p-8">
             <form
               class="space-y-6"
-              @submit.prevent="handleSubmit"
+              @submit.prevent="showConfirm"
             >
               <div>
                 <label
@@ -273,6 +273,60 @@
       </UContainer>
     </section>
 
+    <!-- Confirm Dialog -->
+    <UModal v-model:open="isConfirmOpen">
+      <template #content>
+        <div class="bg-[#111] p-8 space-y-6">
+          <h3 class="text-lg font-semibold text-[#e8e8e8]">
+            送信確認
+          </h3>
+          <p class="text-sm text-[#a0a0a0]">
+            以下の内容で送信します。よろしいですか？
+          </p>
+          <dl class="space-y-3 text-sm">
+            <div>
+              <dt class="font-mono text-[#606060]">
+                NAME
+              </dt>
+              <dd class="text-[#e8e8e8] mt-1">
+                {{ formState.name }}
+              </dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[#606060]">
+                EMAIL
+              </dt>
+              <dd class="text-[#e8e8e8] mt-1">
+                {{ formState.email }}
+              </dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[#606060]">
+                MESSAGE
+              </dt>
+              <dd class="text-[#e8e8e8] mt-1 whitespace-pre-wrap">
+                {{ formState.message }}
+              </dd>
+            </div>
+          </dl>
+          <div class="flex gap-3 justify-end">
+            <button
+              class="px-6 py-3 border border-[#2a2a2a] text-[#a0a0a0] hover:text-[#e8e8e8] hover:border-[#404040] transition-colors"
+              @click="isConfirmOpen = false"
+            >
+              キャンセル
+            </button>
+            <button
+              class="px-6 py-3 bg-[#22c55e] text-[#0a0a0a] font-semibold hover:bg-[#16a34a] transition-colors"
+              @click="handleSubmit"
+            >
+              送信する
+            </button>
+          </div>
+        </div>
+      </template>
+    </UModal>
+
     <!-- Footer -->
     <footer class="py-8 border-t border-[#1a1a1a]">
       <UContainer>
@@ -314,6 +368,7 @@ const formState = ref({
 })
 
 const isSubmitting = ref(false)
+const isConfirmOpen = ref(false)
 const toast = useToast()
 
 const scrollToContact = () => {
@@ -328,7 +383,12 @@ const scrollToAbout = () => {
   }
 }
 
+const showConfirm = () => {
+  isConfirmOpen.value = true
+}
+
 const handleSubmit = async () => {
+  isConfirmOpen.value = false
   isSubmitting.value = true
   try {
     await $fetch('/api/contact', {
