@@ -351,12 +351,6 @@ const handleSubmit = async () => {
     isSubmitting.value = false
   }
 }
-
-onMounted(() => {
-  if (import.meta.client) {
-    document.body.classList.add('page-loaded')
-  }
-})
 </script>
 
 <style scoped>
