@@ -20,7 +20,8 @@ export default defineNuxtConfig({
   ],
 
   runtimeConfig: {
-    slackWebhookUrl: ''
+    slackBotToken: '',
+    slackChannelId: ''
   },
 
   compatibilityDate: '2025-01-15',

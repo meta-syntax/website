@@ -12,24 +12,29 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const { slackWebhookUrl } = useRuntimeConfig()
+  const { slackBotToken, slackChannelId } = useRuntimeConfig()
 
-  if (!slackWebhookUrl) {
+  if (!slackBotToken || !slackChannelId) {
     throw createError({
       statusCode: 500,
-      statusMessage: 'Slack Webhook URL が設定されていません'
+      statusMessage: 'Slack の設定が不足しています'
     })
   }
 
-  await $fetch(slackWebhookUrl, {
+  const response = await $fetch<{ ok: boolean; error?: string }>('https://slack.com/api/chat.postMessage', {
     method: 'POST',
+    headers: {
+      Authorization: `Bearer ${slackBotToken}`
+    },
     body: {
+      channel: slackChannelId,
+      text: `${name}さんからお問い合わせがありました`,
       blocks: [
         {
           type: 'header',
           text: {
             type: 'plain_text',
-            text: 'お問い合わせがありました'
+            text: `${name}さんからお問い合わせがありました`
           }
         },
         {
@@ -67,6 +72,13 @@ export default defineEventHandler(async (event) => {
       ]
     }
   })
+
+  if (!response.ok) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: `Slack送信エラー: ${response.error}`
+    })
+  }
 
   return { success: true }
 })
