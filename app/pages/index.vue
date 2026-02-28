@@ -314,6 +314,7 @@ const formState = ref({
 })
 
 const isSubmitting = ref(false)
+const toast = useToast()
 
 const scrollToContact = () => {
   if (import.meta.client) {
@@ -329,10 +330,26 @@ const scrollToAbout = () => {
 
 const handleSubmit = async () => {
   isSubmitting.value = true
-  await new Promise(resolve => setTimeout(resolve, 1000))
-  alert('メッセージを送信しました。ありがとうございます！')
-  formState.value = { name: '', email: '', message: '' }
-  isSubmitting.value = false
+  try {
+    await $fetch('/api/contact', {
+      method: 'POST',
+      body: formState.value
+    })
+    toast.add({
+      title: '送信完了',
+      description: 'メッセージを送信しました。ありがとうございます！',
+      color: 'success'
+    })
+    formState.value = { name: '', email: '', message: '' }
+  } catch {
+    toast.add({
+      title: '送信エラー',
+      description: '送信に失敗しました。時間をおいて再度お試しください。',
+      color: 'error'
+    })
+  } finally {
+    isSubmitting.value = false
+  }
 }
 
 onMounted(() => {

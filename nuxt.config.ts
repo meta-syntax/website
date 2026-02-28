@@ -19,6 +19,10 @@ export default defineNuxtConfig({
     '~/assets/css/main.css'
   ],
 
+  runtimeConfig: {
+    slackWebhookUrl: ''
+  },
+
   compatibilityDate: '2025-01-15',
 
   // 静的サイト生成設定
