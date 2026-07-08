@@ -2,24 +2,96 @@
 @import "@nuxt/ui";
 
 @theme static {
-  /* Zen Kaku Gothic New を使用 */
-  --font-sans: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+  /* 欧文 Inter + 和文 Noto Sans JP（セルフホスト） */
+  --font-sans: 'Inter', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
 }
 
-/* ダークモードベース - 黒背景に白文字 */
+/* Swiss Typographic パレット（ライト固定・紙白背景） */
 :root {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #141414;
-  --bg-card: #1a1a1a;
-  --text-primary: #e8e8e8;
-  --text-secondary: #a0a0a0;
-  --accent: #22c55e;
-  --accent-dim: #16a34a;
-  --border: #2a2a2a;
+  --paper: #f6f6f4;
+  --ink: #111111;
+  --text-sub: #55555a;
+  --accent: #1d4ed8;
+  --ghost: rgba(17, 17, 17, 0.07);
+  --hair: rgba(17, 17, 17, 0.15);
 }
 
-/* UTooltipのborderを無効化 */
+/* UTooltipのborderを無効化（既存の打ち消しを維持） */
 [data-reka-popper-content-wrapper] [data-slot="content"] {
   border: none !important;
   box-shadow: none !important;
+}
+
+/* ============ 巨大ゴースト数字 ============ */
+/* 負のtopでグリフ上部をセクションのoverflow:hiddenにより見切る意匠。
+   Heroはゴーストを持たないため、3px罫を跨いだ隣接数字の干渉は起きない。 */
+.ghost {
+  position: absolute;
+  top: -0.18em;
+  right: 2%;
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: clamp(180px, 30vw, 340px);
+  line-height: 0.8;
+  color: var(--ghost);
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  will-change: transform;
+}
+
+/* ============ スクロール出現アニメーション ============ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============ 左→右の下線ドロー（transformのみ） ============ */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s ease;
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 480px) {
+  .ghost {
+    font-size: clamp(140px, 46vw, 220px);
+  }
+}
+
+/* ============ reduced-motion: 全演出を無効化して静的表示に ============ */
+/* 等specの後方ルールで打ち消すため !important は使わない */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .link-underline::after {
+    transition: none;
+  }
 }

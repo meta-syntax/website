@@ -12,12 +12,23 @@ export default defineNuxtConfig({
     enabled: true
   },
 
-  // セルフホストフォント（Zen Kaku Gothic New）
+  // セルフホストフォント（Inter + Noto Sans JP）
   css: [
-    '@fontsource/zen-kaku-gothic-new/400.css',
-    '@fontsource/zen-kaku-gothic-new/700.css',
+    '@fontsource/inter/500.css',
+    '@fontsource/inter/700.css',
+    '@fontsource/inter/900.css',
+    '@fontsource/noto-sans-jp/400.css',
+    '@fontsource/noto-sans-jp/500.css',
+    '@fontsource/noto-sans-jp/700.css',
+    '@fontsource/noto-sans-jp/900.css',
     '~/assets/css/main.css'
   ],
+
+  // OSのダークモード設定に影響されずライト表示で固定する
+  colorMode: {
+    preference: 'light',
+    fallback: 'light'
+  },
 
   runtimeConfig: {
     slackBotToken: '',

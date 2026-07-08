@@ -8,26 +8,26 @@
         v-model:open="tooltipOpen"
         :delay-duration="100"
         :ui="{
-          content: '!bg-[#0a0a0a] border border-[#2a2a2a] shadow-2xl !ring-0'
+          content: '!bg-[#f6f6f4] border border-[#111] !rounded-none !shadow-none !ring-0'
         }"
         :content="{ sideOffset: 8 }"
       >
         <template #content>
-          <div class="space-y-1.5 text-xs p-3 bg-[#0a0a0a] rounded">
-            <div><span class="font-mono text-[#e8e8e8]">100%</span>：責任者（設計/実装/運用/障害対応/育成）</div>
-            <div><span class="font-mono text-[#e8e8e8]">80%</span>：主担当〜リード（意思決定）</div>
-            <div><span class="font-mono text-[#e8e8e8]">60%</span>：実務で安定して使える</div>
-            <div><span class="font-mono text-[#e8e8e8]">40%</span>：部分的に扱える</div>
-            <div><span class="font-mono text-[#e8e8e8]">20%</span>：触った程度</div>
+          <div class="space-y-1.5 text-xs p-3 bg-[#f6f6f4] text-[#55555a]">
+            <div><span class="tabular-nums font-semibold text-[#111]">100%</span>：責任者（設計/実装/運用/障害対応/育成）</div>
+            <div><span class="tabular-nums font-semibold text-[#111]">80%</span>：主担当〜リード（意思決定）</div>
+            <div><span class="tabular-nums font-semibold text-[#111]">60%</span>：実務で安定して使える</div>
+            <div><span class="tabular-nums font-semibold text-[#111]">40%</span>：部分的に扱える</div>
+            <div><span class="tabular-nums font-semibold text-[#111]">20%</span>：触った程度</div>
           </div>
         </template>
         <button
           type="button"
-          class="inline-flex items-center gap-1.5 text-xs text-[#808080] hover:text-[#22c55e] transition-colors group"
+          class="inline-flex items-center gap-1.5 text-xs text-[#55555a] hover:text-[#1d4ed8] transition-colors group"
           @click="tooltipOpen = !tooltipOpen"
         >
           <span
-            class="w-4 h-4 rounded-full border border-[#404040] flex items-center justify-center text-[10px] font-semibold group-hover:border-[#22c55e]"
+            class="w-4 h-4 border border-[#111] flex items-center justify-center text-[10px] font-semibold group-hover:border-[#1d4ed8]"
           >i</span>
           <span>数値の見方</span>
         </button>

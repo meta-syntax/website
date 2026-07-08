@@ -1,21 +1,21 @@
 <template>
   <div
-    class="tech-stack-item group py-4 border-b border-[#1a1a1a] last:border-b-0"
+    class="tech-stack-item group py-4 border-b border-[rgba(17,17,17,0.15)] last:border-b-0"
     :class="{ 'is-visible': isAnimated }"
   >
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
-      <span class="text-base sm:text-lg text-[#e8e8e8] group-hover:text-[#22c55e] transition-colors">
+      <span class="text-base sm:text-lg text-[#111] group-hover:text-[#1d4ed8] transition-colors">
         {{ tech.name }}
       </span>
       <div class="flex items-center gap-4">
-        <div class="flex-1 sm:w-48 h-1 bg-[#1a1a1a]">
+        <div class="flex-1 sm:w-48 h-1 bg-[rgba(17,17,17,0.12)]">
           <div
-            class="h-full bg-[#22c55e] transition-all duration-1000 ease-out"
+            class="tech-bar-fill h-full bg-[#111]"
             :style="{ width: isAnimated ? `${tech.percentage}%` : '0%' }"
           />
         </div>
         <span
-          class="text-sm font-mono text-[#606060] tabular-nums w-12 text-right"
+          class="text-sm text-[#55555a] tabular-nums w-12 text-right"
         >
           {{ isAnimated ? tech.percentage : '00' }}%
         </span>
@@ -51,3 +51,15 @@ watch(() => props.isVisible, (newValue) => {
   }
 }, { immediate: true })
 </script>
+
+<style scoped>
+.tech-bar-fill {
+  transition: width 1s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-bar-fill {
+    transition: none;
+  }
+}
+</style>

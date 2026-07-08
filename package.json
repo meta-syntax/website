@@ -12,6 +12,8 @@
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/noto-sans-jp": "^5.2.9",
     "@fontsource/zen-kaku-gothic-new": "^5.2.7",
     "@iconify-json/lucide": "^1.2.82",
     "@iconify-json/simple-icons": "^1.2.63",
