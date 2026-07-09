@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const response = await $fetch<{ ok: boolean; error?: string }>('https://slack.com/api/chat.postMessage', {
+  const response = await $fetch<{ ok: boolean, error?: string }>('https://slack.com/api/chat.postMessage', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${slackBotToken}`
