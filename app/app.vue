@@ -1,4 +1,7 @@
 <script setup lang="ts">
+// OGP・canonical はクローラーが絶対URLしか解釈しないため、公開URLを基点にする
+const siteUrl = 'https://meta-syntax.biz'
+
 useHead({
   htmlAttrs: {
     lang: 'ja',
@@ -12,24 +15,33 @@ useHead({
     { name: 'author', content: 'MetaSyntax' }
   ],
   link: [
-    { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }
+    { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+    { rel: 'canonical', href: `${siteUrl}/` }
     // フォントはセルフホスト（@fontsource/zen-kaku-gothic-new）
   ]
 })
 
 const title = 'MetaSyntax | フリーランスソフトウェアエンジニア'
-const description = 'MetaSyntaxは、プロフェッショナルなソフトウェア開発サービスを提供するフリーランスエンジニアです。Vue.js、Nuxt、TypeScript、Node.jsなどのモダンな技術スタックで、高品質なWebアプリケーション開発を承ります。'
+const description = 'フリーランスエンジニア小林聡太（MetaSyntax）のサイトです。Vue.js / Nuxt を中心に、Webアプリの設計から実装までを請け負います。VueUse や Vue 本体に修正のプルリクエストを出しています。'
 
 useSeoMeta({
   title,
   description,
   ogTitle: title,
   ogDescription: description,
-  ogImage: '/og-image.jpg',
+  ogType: 'website',
+  ogUrl: `${siteUrl}/`,
+  ogSiteName: 'MetaSyntax',
+  ogLocale: 'ja_JP',
+  ogImage: `${siteUrl}/og-image.png`,
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  ogImageAlt: '複雑さを紐解き、組み上げる。MetaSyntax 小林 聡太',
+  twitterImage: `${siteUrl}/og-image.png`,
   twitterCard: 'summary_large_image',
   twitterTitle: title,
   twitterDescription: description,
-  keywords: 'フリーランス, ソフトウェアエンジニア, Web開発, Vue.js, Nuxt, TypeScript, Node.js, プログラミング, 開発サービス'
+  keywords: 'フリーランス, フロントエンドエンジニア, Vue.js, Nuxt, TypeScript, Laravel, VueUse, OSS'
 })
 </script>
 

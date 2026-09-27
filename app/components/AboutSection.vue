@@ -9,7 +9,7 @@
         <div class="w-26 h-26 border border-[#111] overflow-hidden mb-5">
           <NuxtImg
             src="/SNS-icon-2505-162.webp"
-            alt="Profile Icon"
+            alt="小林 聡太のアイコン"
             width="128"
             height="128"
             sizes="128px"
@@ -28,10 +28,9 @@
       </div>
     </div>
 
-    <!-- 詳細（2×2グリッド） -->
+    <!-- 詳細 -->
     <div class="lg:col-span-8">
       <div class="grid sm:grid-cols-2 gap-x-10 gap-y-8">
-        <!-- 経歴 -->
         <div
           class="reveal border-t border-[rgba(17,17,17,0.15)] pt-[18px]"
           data-idx="2"
@@ -43,74 +42,45 @@
           <ul class="space-y-2.5">
             <li class="flex gap-3">
               <span class="w-2 h-px bg-[#111] shrink-0 mt-[0.85em]" />
-              <span class="text-[15px] leading-relaxed text-[#55555a]">8年間の実務経験を通じて、Webアプリケーションから業務システムまで幅広いプロジェクトに携わる</span>
+              <span class="text-[15px] leading-relaxed text-[#55555a]">2018年からWeb開発の仕事をしています。</span>
             </li>
             <li class="flex gap-3">
               <span class="w-2 h-px bg-[#111] shrink-0 mt-[0.85em]" />
-              <span class="text-[15px] leading-relaxed text-[#55555a]">チーム開発とクライアントワークで技術力とコミュニケーション能力を研鑽</span>
+              <span class="text-[15px] leading-relaxed text-[#55555a]">2024年からは業務システムのリプレイスで、Nuxt と TypeScript を使って画面と共通コンポーネントを作っています。</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="w-2 h-px bg-[#111] shrink-0 mt-[0.85em]" />
+              <span class="text-[15px] leading-relaxed text-[#55555a]">同じ現場で、コードレビューも担当しています。</span>
             </li>
           </ul>
         </div>
 
-        <!-- 働き方 -->
         <div
           class="reveal border-t border-[rgba(17,17,17,0.15)] pt-[18px]"
           data-idx="3"
         >
           <h4 class="flex items-baseline gap-2.5 text-base font-bold tracking-[0.02em] text-[#111] mb-3">
             <span class="inline-block w-[18px] h-[3px] bg-[#111] shrink-0 -translate-y-1" />
-            働き方
+            仕事の進め方
           </h4>
           <ul class="space-y-2.5">
             <li class="flex gap-3">
               <span class="w-2 h-px bg-[#111] shrink-0 mt-[0.85em]" />
-              <span class="text-[15px] leading-relaxed text-[#55555a]">フリーランスエンジニアとして柔軟な働き方を実現</span>
+              <span
+                class="text-[15px] leading-relaxed text-[#55555a]"
+              >懸念事項があるときは、代替案と一緒に迅速に共有します。</span>
             </li>
             <li class="flex gap-3">
               <span class="w-2 h-px bg-[#111] shrink-0 mt-[0.85em]" />
-              <span class="text-[15px] leading-relaxed text-[#55555a]">小回りの良さを活かした迅速な対応と密なコミュニケーション</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- 専門領域 -->
-        <div
-          class="reveal border-t border-[rgba(17,17,17,0.15)] pt-[18px]"
-          data-idx="4"
-        >
-          <h4 class="flex items-baseline gap-2.5 text-base font-bold tracking-[0.02em] text-[#111] mb-3">
-            <span class="inline-block w-[18px] h-[3px] bg-[#111] shrink-0 -translate-y-1" />
-            専門領域
-          </h4>
-          <ul class="space-y-2.5">
-            <li class="flex gap-3">
-              <span class="w-2 h-px bg-[#111] shrink-0 mt-[0.85em]" />
-              <span class="text-[15px] leading-relaxed text-[#55555a]">Vue.js / Nuxt を中心としたモダンなフロントエンド開発</span>
+              <span
+                class="text-[15px] leading-relaxed text-[#55555a]"
+              >複雑な技術の話は、相手の立場に合わせた言葉で説明します。</span>
             </li>
             <li class="flex gap-3">
               <span class="w-2 h-px bg-[#111] shrink-0 mt-[0.85em]" />
-              <span class="text-[15px] leading-relaxed text-[#55555a]">スケーラブルで保守性の高いアーキテクチャ設計</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- 価値観 -->
-        <div
-          class="reveal border-t border-[rgba(17,17,17,0.15)] pt-[18px]"
-          data-idx="5"
-        >
-          <h4 class="flex items-baseline gap-2.5 text-base font-bold tracking-[0.02em] text-[#111] mb-3">
-            <span class="inline-block w-[18px] h-[3px] bg-[#111] shrink-0 -translate-y-1" />
-            大切にしていること
-          </h4>
-          <ul class="space-y-2.5">
-            <li class="flex gap-3">
-              <span class="w-2 h-px bg-[#111] shrink-0 mt-[0.85em]" />
-              <span class="text-[15px] leading-relaxed text-[#55555a]">保守性と可読性を重視した、長期運用に耐えるコード品質</span>
-            </li>
-            <li class="flex gap-3">
-              <span class="w-2 h-px bg-[#111] shrink-0 mt-[0.85em]" />
-              <span class="text-[15px] leading-relaxed text-[#55555a]">チーム全体が理解しやすい設計で、プロジェクトの持続的成長を支援</span>
+              <span
+                class="text-[15px] leading-relaxed text-[#55555a]"
+              >作業に入る前に見積もりを出して、共有してから着手します。</span>
             </li>
           </ul>
         </div>

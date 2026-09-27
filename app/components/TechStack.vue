@@ -60,7 +60,7 @@ const technologies = [
   { name: 'PostgreSQL', percentage: 60 },
   { name: 'Docker', percentage: 70 },
   { name: 'AWS', percentage: 70 },
-  { name: 'Test(Vitest/Testing Library/Playwright)', percentage: 75 },
+  { name: 'Test（Vitest / Testing Library / Playwright）', percentage: 75 },
   { name: 'CI/CD（GitHub Actions）', percentage: 75 }
 ]
 

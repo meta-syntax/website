@@ -1,14 +1,45 @@
+// Slack mrkdwn の制御文字をエスケープし、<!channel> 等のメンションや偽リンクを埋め込めないようにする
+const escapeMrkdwn = (text: string) =>
+  text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const MAX_LENGTH = { name: 100, email: 254, message: 5000 }
+
 export default defineEventHandler(async (event) => {
-  const { name, email, message } = await readBody<{
-    name: string
-    email: string
-    message: string
+  const body = await readBody<{
+    name?: unknown
+    email?: unknown
+    message?: unknown
+    website?: unknown
   }>(event)
 
-  if (!name?.trim() || !email?.trim() || !message?.trim()) {
+  // ハニーポット: 人間には見えない欄が埋まっていたらボットとみなし、送信したふりをして捨てる
+  if (typeof body?.website === 'string' && body.website.trim()) {
+    return { success: true }
+  }
+
+  const name = typeof body?.name === 'string' ? body.name.trim() : ''
+  const email = typeof body?.email === 'string' ? body.email.trim() : ''
+  const message = typeof body?.message === 'string' ? body.message.trim() : ''
+
+  if (!name || !email || !message) {
     throw createError({
       statusCode: 400,
       statusMessage: '全ての項目を入力してください'
+    })
+  }
+
+  if (!EMAIL_PATTERN.test(email)) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'メールアドレスの形式が正しくありません'
+    })
+  }
+
+  if (name.length > MAX_LENGTH.name || email.length > MAX_LENGTH.email || message.length > MAX_LENGTH.message) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: '入力が長すぎます'
     })
   }
 
@@ -28,7 +59,7 @@ export default defineEventHandler(async (event) => {
     },
     body: {
       channel: slackChannelId,
-      text: `${name}さんからお問い合わせがありました`,
+      text: `${escapeMrkdwn(name)}さんからお問い合わせがありました`,
       blocks: [
         {
           type: 'header',
@@ -42,11 +73,11 @@ export default defineEventHandler(async (event) => {
           fields: [
             {
               type: 'mrkdwn',
-              text: `*お名前:*\n${name}`
+              text: `*お名前:*\n${escapeMrkdwn(name)}`
             },
             {
               type: 'mrkdwn',
-              text: `*メールアドレス:*\n${email}`
+              text: `*メールアドレス:*\n${escapeMrkdwn(email)}`
             }
           ]
         },
@@ -54,7 +85,7 @@ export default defineEventHandler(async (event) => {
           type: 'section',
           text: {
             type: 'mrkdwn',
-            text: `*メッセージ:*\n${message}`
+            text: `*メッセージ:*\n${escapeMrkdwn(message)}`
           }
         },
         {

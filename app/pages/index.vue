@@ -1,15 +1,12 @@
 <template>
-  <div
-    class="min-h-screen bg-[#f6f6f4] text-[#111]"
-    role="main"
-  >
+  <div class="min-h-screen bg-[#f6f6f4] text-[#111]">
     <!-- Hero Section -->
     <section
       class="relative min-h-screen flex items-center overflow-hidden"
       aria-label="ヒーローセクション"
     >
-      <UContainer class="relative z-10 py-20">
-        <div class="max-w-3xl">
+      <UContainer class="relative z-10 py-20 xl:flex xl:items-end xl:justify-between xl:gap-16">
+        <div class="max-w-4xl">
           <!-- ステータスバッジ -->
           <div
             class="reveal inline-flex items-center gap-2.5 border-[1.5px] border-[#111] px-3.5 py-2 mb-10"
@@ -24,7 +21,8 @@
             class="reveal text-[clamp(56px,8.5vw,108px)] font-black text-[#111] leading-[1.08] tracking-[-0.03em]"
             data-idx="1"
           >
-            複雑を<span class="text-[#1d4ed8]">紐解き</span>、<br>
+            <!-- 狭い画面では「複雑さを / 紐解き、」の句の切れ目でだけ改行する -->
+            <span class="inline-block">複雑さを</span><span class="inline-block"><span class="text-[#1d4ed8]">紐解き</span>、</span><br>
             組み上げる
           </h1>
 
@@ -32,8 +30,8 @@
             class="reveal mt-9 text-[clamp(16px,1.6vw,19px)] text-[#55555a] max-w-[640px] leading-[1.9]"
             data-idx="2"
           >
-            8年の経験を持つフリーランスエンジニア。<br>
-            Vue.js / Nuxt を中心に、設計から実装まで。
+            <!-- 改行タグの前後に空白を入れない（スマホ幅で和文の間に半角スペースが出る） -->
+            Vue.js / Nuxt が専門のフリーランスエンジニアです。<br class="hidden sm:inline">要件の整理から、アーキテクチャ設計、実装まで引き受けます。
           </p>
 
           <!-- CTA -->
@@ -55,6 +53,35 @@
             </button>
           </div>
         </div>
+
+        <!-- 目次: 見出しの右に並べる幅がある xl 以上でだけ出す -->
+        <nav
+          class="reveal hidden xl:block w-[280px] shrink-0"
+          data-idx="4"
+          aria-label="目次"
+        >
+          <p class="text-[11px] font-bold uppercase tracking-[0.12em] text-[#111] mb-4">
+            INDEX
+          </p>
+          <ol class="toc-list">
+            <li
+              v-for="(item, index) in toc"
+              :key="item.id"
+            >
+              <a
+                :href="`#${item.id}`"
+                class="toc-row"
+              >
+                <span class="toc-num">{{ String(index + 1).padStart(2, '0') }}</span>
+                <span class="toc-label">{{ item.label }}</span>
+                <UIcon
+                  name="i-lucide-arrow-down-right"
+                  class="toc-icon w-4 h-4 shrink-0"
+                />
+              </a>
+            </li>
+          </ol>
+        </nav>
       </UContainer>
     </section>
 
@@ -118,11 +145,11 @@
       </UContainer>
     </section>
 
-    <!-- Works Section -->
+    <!-- OSS Section -->
     <section
-      id="works"
+      id="oss"
       class="relative overflow-hidden py-32 border-t-[3px] border-[#111]"
-      aria-labelledby="works-heading"
+      aria-labelledby="oss-heading"
     >
       <span
         class="ghost"
@@ -134,17 +161,17 @@
           data-idx="0"
         >
           <p class="text-[11px] font-bold uppercase tracking-[0.12em] text-[#111]">
-            03 / WORKS
+            03 / OSS
           </p>
           <h2
-            id="works-heading"
+            id="oss-heading"
             class="mt-4 text-4xl sm:text-5xl font-black tracking-[-0.02em] text-[#111]"
           >
-            個人開発
+            OSSへの貢献
           </h2>
         </div>
 
-        <WorksSection />
+        <OssSection />
       </UContainer>
     </section>
 
@@ -181,14 +208,34 @@
             class="svc-cell reveal"
             :data-idx="index + 1"
           >
-            <span class="svc-num">0{{ index + 1 }}</span>
+            <span class="svc-num">{{ String(index + 1).padStart(2, '0') }}</span>
             <h3 class="svc-title">
-              {{ service.title }}
+              <!-- 「/」の直後でだけ折り返すよう、区切りごとに改行不可のまとまりにする -->
+              <template
+                v-for="(part, i) in service.title.split(' / ')"
+                :key="i"
+              >
+                <span class="inline-block">{{ part }}<template v-if="i < service.title.split(' / ').length - 1">&nbsp;/</template></span>{{ ' ' }}
+              </template>
             </h3>
             <p class="svc-desc">
               {{ service.description }}
             </p>
           </div>
+
+          <!-- 相談への導線。カードが奇数枚でも2列のグリッドを埋める -->
+          <a
+            href="#contact"
+            class="svc-cell svc-cta reveal"
+            :data-idx="services.length + 1"
+          >
+            <UIcon
+              name="i-lucide-arrow-right"
+              class="svc-cta-icon w-6 h-6"
+            />
+            <span class="svc-cta-label">CONTACT</span>
+            <span class="svc-cta-text">ここにない仕事も、<br>まずはご相談ください。</span>
+          </a>
         </div>
       </UContainer>
     </section>
@@ -259,7 +306,7 @@
             data-idx="2"
           >
             <form
-              class="space-y-6"
+              class="relative space-y-6"
               @submit.prevent="showConfirm"
             >
               <div>
@@ -273,6 +320,7 @@
                   id="name"
                   v-model="formState.name"
                   type="text"
+                  maxlength="100"
                   placeholder="山田 太郎"
                   class="w-full px-4 py-3 bg-[#f6f6f4] border border-[#111] text-[#111] placeholder:text-[rgba(85,85,90,0.6)] focus:border-[#1d4ed8] focus:outline-none transition-colors"
                   required
@@ -289,6 +337,7 @@
                   id="email"
                   v-model="formState.email"
                   type="email"
+                  maxlength="254"
                   placeholder="your@email.com"
                   class="w-full px-4 py-3 bg-[#f6f6f4] border border-[#111] text-[#111] placeholder:text-[rgba(85,85,90,0.6)] focus:border-[#1d4ed8] focus:outline-none transition-colors"
                   required
@@ -305,10 +354,25 @@
                   id="message"
                   v-model="formState.message"
                   rows="5"
+                  maxlength="5000"
                   placeholder="プロジェクトの詳細をご記入ください..."
                   class="w-full px-4 py-3 bg-[#f6f6f4] border border-[#111] text-[#111] placeholder:text-[rgba(85,85,90,0.6)] focus:border-[#1d4ed8] focus:outline-none transition-colors resize-none"
                   required
                 />
+              </div>
+              <!-- ハニーポット: 人間には見えない欄。ボットが埋めるとサーバー側で破棄する -->
+              <div
+                class="absolute -left-[9999px] w-px h-px overflow-hidden"
+                aria-hidden="true"
+              >
+                <label for="website">Website</label>
+                <input
+                  id="website"
+                  v-model="formState.website"
+                  type="text"
+                  tabindex="-1"
+                  autocomplete="off"
+                >
               </div>
               <button
                 type="submit"
@@ -395,29 +459,42 @@
 </template>
 
 <script setup lang="ts">
+const toc = [
+  { id: 'tech-stack', label: '技術スタック' },
+  { id: 'about', label: '自己紹介' },
+  { id: 'oss', label: 'OSSへの貢献' },
+  { id: 'services', label: 'サービス' },
+  { id: 'contact', label: 'お問い合わせ' }
+]
+
 const services = [
   {
-    title: 'フロントエンド開発',
-    description: 'Vue.js/Nuxtを使ったモダンなWebアプリケーション開発。コンポーネント設計からパフォーマンス最適化まで対応します。'
+    title: '要件の整理',
+    description: '依頼者の話を聞いて、必要な画面と機能を一覧にします。どれから作るかも一緒に決めます。'
   },
   {
-    title: 'UI/UX実装',
-    description: 'デザインシステムの構築やアクセシビリティに配慮したユーザーインターフェースの実装を行います。'
+    title: '技術選定',
+    description: 'フレームワークやライブラリを、チームの経験と運用の手間から選びます。選んだ理由は文書に残します。'
   },
   {
-    title: '技術選定・設計',
-    description: 'プロジェクトの要件に合わせた技術スタックの選定と、スケーラブルなアーキテクチャの設計を支援します。'
+    title: 'アーキテクチャ設計 / コードレビュー',
+    description: '画面、状態管理、API とのやりとりをどこで分けるかを決めて、設計書にまとめます。実装のレビューでは、その分け方どおりに書かれているかを確かめます。'
   },
   {
-    title: 'パフォーマンス最適化',
-    description: 'Core Web Vitalsの改善やバンドルサイズの削減など、Webアプリケーションの速度向上を実現します。'
+    title: '業務システムの画面開発',
+    description: '一覧や検索、入力フォームが多い管理画面を、Vue / Nuxt と TypeScript で作ります。'
+  },
+  {
+    title: '既存画面のリプレイス',
+    description: '古い仕組みで作られた画面を、Nuxt と TypeScript に置き換えます。データの取得、状態の管理、画面の表示を役割ごとに分けて、アーキテクチャから組み直します。'
   }
 ]
 
 const formState = ref({
   name: '',
   email: '',
-  message: ''
+  message: '',
+  website: ''
 })
 
 const isSubmitting = ref(false)
@@ -453,7 +530,7 @@ const handleSubmit = async () => {
       description: 'メッセージを送信しました。ありがとうございます！',
       color: 'success'
     })
-    formState.value = { name: '', email: '', message: '' }
+    formState.value = { name: '', email: '', message: '', website: '' }
   } catch {
     toast.add({
       title: '送信エラー',
@@ -549,6 +626,61 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
+/* ============ Hero 目次 ============ */
+.toc-list {
+  border-top: 1.5px solid var(--ink);
+}
+
+.toc-list > li {
+  border-bottom: 1px solid var(--ink);
+}
+
+.toc-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 0.5rem;
+  color: var(--ink);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.toc-row:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.toc-num {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--text-sub);
+}
+
+.toc-row:hover .toc-num {
+  color: var(--accent);
+}
+
+.toc-label {
+  flex: 1;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.toc-icon {
+  opacity: 0.4;
+}
+
+.toc-row:hover .toc-icon {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toc-row {
+    transition: none;
+  }
+}
+
 /* ============ 表組み風 Services ============ */
 .svc-table {
   border: 1px solid var(--ink);
@@ -561,11 +693,10 @@ onBeforeUnmount(() => {
   padding: 2.25rem 2rem;
   border-bottom: 1px solid var(--ink);
   /* reveal（opacity/transform）とホバー反転（背景/文字色）の両方を animate する */
-  transition:
-    opacity 0.55s ease-out,
-    transform 0.55s ease-out,
-    background-color 0.2s ease,
-    color 0.2s ease;
+  transition: opacity 0.55s ease-out,
+  transform 0.55s ease-out,
+  background-color 0.2s ease,
+  color 0.2s ease;
 }
 
 .svc-cell:last-child {
@@ -614,6 +745,39 @@ onBeforeUnmount(() => {
   color: var(--paper);
 }
 
+/* ============ 相談への導線セル ============ */
+.svc-cta {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  min-height: 12rem;
+  background: var(--accent);
+  color: #fff;
+}
+
+.svc-cta:hover {
+  background: var(--ink);
+}
+
+.svc-cta-icon {
+  margin-bottom: auto;
+}
+
+.svc-cta-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+.svc-cta-text {
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
 @media (min-width: 640px) {
   .svc-table {
     grid-template-columns: 1fr 1fr;
@@ -627,7 +791,7 @@ onBeforeUnmount(() => {
     border-right: none;
   }
 
-  .svc-cell:nth-child(n + 3) {
+  .svc-cell:nth-last-child(2):nth-child(odd) {
     border-bottom: none;
   }
 }
