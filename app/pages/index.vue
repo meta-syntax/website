@@ -703,11 +703,6 @@ onBeforeUnmount(() => {
   border-bottom: none;
 }
 
-.svc-cell:hover {
-  background: var(--ink);
-  color: var(--paper);
-}
-
 .svc-num {
   display: block;
   margin-bottom: 1.375rem;
@@ -716,10 +711,6 @@ onBeforeUnmount(() => {
   font-size: 12px;
   letter-spacing: 0.04em;
   color: var(--text-sub);
-}
-
-.svc-cell:hover .svc-num {
-  color: var(--accent);
 }
 
 .svc-title {
@@ -731,18 +722,10 @@ onBeforeUnmount(() => {
   color: var(--ink);
 }
 
-.svc-cell:hover .svc-title {
-  color: var(--paper);
-}
-
 .svc-desc {
   font-size: 15px;
   line-height: 1.85;
   color: var(--text-sub);
-}
-
-.svc-cell:hover .svc-desc {
-  color: var(--paper);
 }
 
 /* ============ 相談への導線セル ============ */
@@ -754,10 +737,6 @@ onBeforeUnmount(() => {
   min-height: 12rem;
   background: var(--accent);
   color: #fff;
-}
-
-.svc-cta:hover {
-  background: var(--ink);
 }
 
 .svc-cta-icon {
@@ -776,6 +755,33 @@ onBeforeUnmount(() => {
   font-size: 22px;
   line-height: 1.4;
   letter-spacing: -0.01em;
+}
+
+/*
+ * 反転はマウス操作の端末だけにする。スマホではタップで :hover が付いたまま残り、
+ * CONTACT のセルがお問い合わせへ移動したあとも黒背景のままになるため
+ */
+@media (hover: hover) {
+  .svc-cell:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .svc-cell:hover .svc-num {
+    color: var(--accent);
+  }
+
+  .svc-cell:hover .svc-title {
+    color: var(--paper);
+  }
+
+  .svc-cell:hover .svc-desc {
+    color: var(--paper);
+  }
+
+  .svc-cta:hover {
+    background: var(--ink);
+  }
 }
 
 @media (min-width: 640px) {

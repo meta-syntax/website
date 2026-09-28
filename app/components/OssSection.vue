@@ -214,11 +214,6 @@ const pad = (n: number) => String(n).padStart(2, '0')
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.oss-row:hover {
-  background: var(--ink);
-  color: var(--paper);
-}
-
 .oss-status {
   justify-self: start;
   padding: 0.25rem 0.5rem;
@@ -265,13 +260,24 @@ const pad = (n: number) => String(n).padStart(2, '0')
   color: var(--accent);
 }
 
-.oss-row:hover .oss-api,
-.oss-row:hover .oss-summary {
-  color: var(--paper);
-}
+/*
+ * 反転はマウス操作の端末だけにする。スマホではタップで :hover が付いたまま残り、
+ * 外部リンクから戻ったときも黒背景のままになるため
+ */
+@media (hover: hover) {
+  .oss-row:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
 
-.oss-row:hover .oss-note {
-  color: #93b4ff;
+  .oss-row:hover .oss-api,
+  .oss-row:hover .oss-summary {
+    color: var(--paper);
+  }
+
+  .oss-row:hover .oss-note {
+    color: #93b4ff;
+  }
 }
 
 @media (max-width: 639px) {
