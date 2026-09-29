@@ -22,7 +22,7 @@ const contributions: Contribution[] = [
   {
     repo: 'vuejs/core',
     number: 15663,
-    status: 'open',
+    status: 'merged',
     api: 'runtime-vapor',
     summary: 'Vapor モードでハイドレーションした要素のスタイルが、本番ビルドでリアクティブに更新されない不具合を修正'
   },
