@@ -1,61 +1,16 @@
 <script setup lang="ts">
-// PR の一覧とステータスは /api/oss-contributions が GitHub から取る
-const { data: fetched, error } = await useFetch('/api/oss-contributions')
+// PR の一覧・ステータス・日本語の説明は /api/oss-contributions が返す。
+// 説明を足すときは server/data/oss-descriptions.ts を書き換える
+const { data, error } = await useFetch('/api/oss-contributions')
 
-interface Override {
-  api?: string
-  summary?: string
-  note?: string
-}
-
-// 日本語の説明。キーは `リポジトリ#番号`。ここに無い PR は英語の PR タイトルをそのまま出す
-const overrides: Record<string, Override> = {
-  'vueuse/vueuse#5524': {
-    summary: 'box: \'border-box\' を指定すると v-element-size のハンドラが呼ばれない不具合を修正',
-    note: 'v14.4.0 でリリース'
-  },
-  'vuejs/core#15663': {
-    summary: 'Vapor モードでハイドレーションした要素のスタイルが、本番ビルドでリアクティブに更新されない不具合を修正'
-  },
-  'vueuse/vueuse#5645': {
-    summary: 'クエリを続けて書き換えると、遷移の完了前に書いた値が失われる不具合を修正'
-  },
-  'nitrojs/nitro#4549': {
-    api: 'dev server',
-    summary: '開発サーバーで、サーバー内部から public のファイルを fetch すると 404 になる不具合を修正'
-  },
-  'vueuse/vueuse#5497': {
-    summary: 'deep: true のとき、shouldCommit に新旧で同じオブジェクトが渡る不具合を修正'
-  }
-}
-
-const contributions = computed(() => (fetched.value ?? []).map((c) => {
-  const override = overrides[`${c.repo}#${c.number}`]
-  return {
-    ...c,
-    api: override?.api ?? c.scope,
-    summary: override?.summary ?? c.title,
-    note: override?.note
-  }
-}))
+// 日本語の説明が無い PR は、英語の PR タイトルから型と括弧を外して出す
+const contributions = computed(() => (data.value?.contributions ?? []).map(c => ({
+  ...c,
+  summary: c.summary ?? c.subject
+})))
+const projects = computed(() => (data.value?.projects ?? []).map(p => p.name))
 
 const mergedCount = computed(() => contributions.value.filter(c => c.status === 'merged').length)
-
-// 数字の帯に出すプロジェクト名。並びは導入文（Vue.js 本体や VueUse、Nitro）に合わせる。
-// ここに無いリポジトリは `owner/name` のまま後ろに並ぶ
-const projectNames: Record<string, string> = {
-  'vuejs/core': 'Vue.js',
-  'vueuse/vueuse': 'VueUse',
-  'nitrojs/nitro': 'Nitro'
-}
-
-const projects = computed(() => {
-  const repos = new Set(contributions.value.map(c => c.repo))
-  return [
-    ...Object.entries(projectNames).filter(([repo]) => repos.has(repo)).map(([, name]) => name),
-    ...[...repos].filter(repo => !(repo in projectNames))
-  ]
-})
 const pad = (n: number) => String(n).padStart(2, '0')
 
 // 取得に失敗したときの逃げ道
