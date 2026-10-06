@@ -32,17 +32,19 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     slackBotToken: '',
-    slackChannelId: ''
+    slackChannelId: '',
+    // OSSセクションの PR 取得用。公開リポジトリを読むだけの fine-grained token で足りる
+    githubToken: ''
+  },
+
+  // OSSセクションの PR のステータスを反映するため、Vercel が1時間ごとにページを作り直す
+  routeRules: {
+    '/': { isr: 60 * 60 }
   },
 
   compatibilityDate: '2025-01-15',
 
-  // 静的サイト生成設定
   nitro: {
-    prerender: {
-      crawlLinks: true,
-      routes: ['/']
-    },
     compressPublicAssets: true
   },
 

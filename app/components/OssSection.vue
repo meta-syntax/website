@@ -1,70 +1,65 @@
 <script setup lang="ts">
-interface Contribution {
-  repo: string
-  number: number
-  status: 'merged' | 'open'
-  api: string
-  summary: string
+// PR の一覧とステータスは /api/oss-contributions が GitHub から取る
+const { data: fetched, error } = await useFetch('/api/oss-contributions')
+
+interface Override {
+  api?: string
+  summary?: string
   note?: string
 }
 
-// PRの状態が変わったら status / note を手で更新する
-// 導入文で「全件テスト付き」と書いているので、テストなしのPRは足さない
-const contributions: Contribution[] = [
-  {
-    repo: 'vueuse/vueuse',
-    number: 5524,
-    status: 'merged',
-    api: 'useElementSize',
+// 日本語の説明。キーは `リポジトリ#番号`。ここに無い PR は英語の PR タイトルをそのまま出す
+const overrides: Record<string, Override> = {
+  'vueuse/vueuse#5524': {
     summary: 'box: \'border-box\' を指定すると v-element-size のハンドラが呼ばれない不具合を修正',
     note: 'v14.4.0 でリリース'
   },
-  {
-    repo: 'vuejs/core',
-    number: 15663,
-    status: 'merged',
-    api: 'runtime-vapor',
+  'vuejs/core#15663': {
     summary: 'Vapor モードでハイドレーションした要素のスタイルが、本番ビルドでリアクティブに更新されない不具合を修正'
   },
-  {
-    repo: 'vueuse/vueuse',
-    number: 5645,
-    status: 'open',
-    api: 'useRouteQuery',
+  'vueuse/vueuse#5645': {
     summary: 'クエリを続けて書き換えると、遷移の完了前に書いた値が失われる不具合を修正'
   },
-  {
-    repo: 'nitrojs/nitro',
-    number: 4549,
-    status: 'open',
+  'nitrojs/nitro#4549': {
     api: 'dev server',
     summary: '開発サーバーで、サーバー内部から public のファイルを fetch すると 404 になる不具合を修正'
   },
-  {
-    repo: 'vueuse/vueuse',
-    number: 5497,
-    status: 'open',
-    api: 'useRefHistory',
+  'vueuse/vueuse#5497': {
     summary: 'deep: true のとき、shouldCommit に新旧で同じオブジェクトが渡る不具合を修正'
   }
-]
+}
 
-const prUrl = (c: Contribution) => `https://github.com/${c.repo}/pull/${c.number}`
+const contributions = computed(() => (fetched.value ?? []).map((c) => {
+  const override = overrides[`${c.repo}#${c.number}`]
+  return {
+    ...c,
+    api: override?.api ?? c.scope,
+    summary: override?.summary ?? c.title,
+    note: override?.note
+  }
+}))
+
+const mergedCount = computed(() => contributions.value.filter(c => c.status === 'merged').length)
 
 // 数字の帯に出すプロジェクト名。並びは導入文（Vue.js 本体や VueUse、Nitro）に合わせる。
-// リポジトリが増えたらここにも足す
+// ここに無いリポジトリは `owner/name` のまま後ろに並ぶ
 const projectNames: Record<string, string> = {
   'vuejs/core': 'Vue.js',
   'vueuse/vueuse': 'VueUse',
   'nitrojs/nitro': 'Nitro'
 }
 
-const repos = new Set(contributions.map(c => c.repo))
-const projects = [
-  ...Object.entries(projectNames).filter(([repo]) => repos.has(repo)).map(([, name]) => name),
-  ...[...repos].filter(repo => !(repo in projectNames))
-]
+const projects = computed(() => {
+  const repos = new Set(contributions.value.map(c => c.repo))
+  return [
+    ...Object.entries(projectNames).filter(([repo]) => repos.has(repo)).map(([, name]) => name),
+    ...[...repos].filter(repo => !(repo in projectNames))
+  ]
+})
 const pad = (n: number) => String(n).padStart(2, '0')
+
+// 取得に失敗したときの逃げ道
+const searchUrl = 'https://github.com/pulls?q=is%3Apr+author%3Ameta-syntax+is%3Apublic+-user%3Ameta-syntax'
 </script>
 
 <template>
@@ -74,80 +69,97 @@ const pad = (n: number) => String(n).padStart(2, '0')
       data-idx="1"
     >
       <!-- 改行タグの前後に空白を入れない（スマホ幅で和文の間に半角スペースが出る） -->
-      Vue.js 本体や VueUse、Nitro のソースコードを読んで、不具合の原因を突き止めています。<br class="hidden sm:inline">{{ contributions.length }}件とも、テストを付けて修正を送りました。
+      Vue.js 本体や VueUse、Nitro のソースコードを読んで、不具合の原因を突き止めています。<br class="hidden sm:inline">見つけた不具合には、修正のプルリクエストを送っています。
     </p>
 
-    <!-- 数字の帯 -->
-    <dl
-      class="oss-stats reveal"
+    <p
+      v-if="error || !contributions.length"
+      class="reveal oss-fallback"
       data-idx="2"
     >
-      <div class="oss-stat">
-        <dt class="oss-stat-label">
-          PROJECTS
-        </dt>
-        <dd class="oss-stat-num">
-          {{ pad(projects.length) }}
-        </dd>
-        <dd class="oss-stat-sub">
-          {{ projects.join(' / ') }}
-        </dd>
-      </div>
-      <div class="oss-stat">
-        <dt class="oss-stat-label">
-          PULL REQUESTS
-        </dt>
-        <dd class="oss-stat-num">
-          {{ pad(contributions.length) }}
-        </dd>
-        <dd class="oss-stat-sub">
-          全件テスト付き
-        </dd>
-      </div>
-    </dl>
-
-    <ul class="oss-list">
-      <li
-        v-for="(c, index) in contributions"
-        :key="`${c.repo}#${c.number}`"
-        class="reveal"
-        :data-idx="index + 3"
+      <a
+        :href="searchUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="link-underline"
       >
-        <a
-          :href="prUrl(c)"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="oss-row group"
+        GitHub でプルリクエストの一覧を見る
+      </a>
+    </p>
+
+    <template v-else>
+      <!-- 数字の帯 -->
+      <dl
+        class="oss-stats reveal"
+        data-idx="2"
+      >
+        <div class="oss-stat">
+          <dt class="oss-stat-label">
+            PROJECTS
+          </dt>
+          <dd class="oss-stat-num">
+            {{ pad(projects.length) }}
+          </dd>
+          <dd class="oss-stat-sub">
+            {{ projects.join(' / ') }}
+          </dd>
+        </div>
+        <div class="oss-stat">
+          <dt class="oss-stat-label">
+            PULL REQUESTS
+          </dt>
+          <dd class="oss-stat-num">
+            {{ pad(contributions.length) }}
+          </dd>
+          <dd class="oss-stat-sub">
+            マージ済み {{ mergedCount }}件 / レビュー中 {{ contributions.length - mergedCount }}件
+          </dd>
+        </div>
+      </dl>
+
+      <ul class="oss-list">
+        <li
+          v-for="(c, index) in contributions"
+          :key="`${c.repo}#${c.number}`"
+          class="reveal"
+          :data-idx="index + 3"
         >
-          <span
-            class="oss-status"
-            :class="c.status === 'merged' ? 'is-merged' : 'is-open'"
+          <a
+            :href="c.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="oss-row group"
           >
-            {{ c.status === 'merged' ? 'MERGED' : 'OPEN' }}
-          </span>
-
-          <span class="min-w-0">
-            <span class="oss-meta">
-              {{ c.repo }} #{{ c.number }}<span class="oss-api">{{ c.api }}</span>
-            </span>
-            <span class="oss-summary">
-              {{ c.summary }}
-            </span>
             <span
-              v-if="c.note"
-              class="oss-note"
+              class="oss-status"
+              :class="c.status === 'merged' ? 'is-merged' : 'is-open'"
             >
-              {{ c.note }}
+              {{ c.status === 'merged' ? 'MERGED' : 'OPEN' }}
             </span>
-          </span>
 
-          <UIcon
-            name="i-lucide-external-link"
-            class="oss-icon w-5 h-5 shrink-0"
-          />
-        </a>
-      </li>
-    </ul>
+            <span class="min-w-0">
+              <span class="oss-meta">
+                {{ c.repo }} #{{ c.number }}<span class="oss-api">{{ c.api }}</span>
+              </span>
+              <span class="oss-summary">
+                {{ c.summary }}
+              </span>
+              <span
+                v-if="c.note"
+                class="oss-note"
+              >
+                {{ c.note }}
+              </span>
+            </span>
+
+            <UIcon
+              name="i-lucide-external-link"
+              class="oss-icon w-5 h-5 shrink-0"
+            />
+          </a>
+        </li>
+      </ul>
+    </template>
   </div>
 </template>
 
@@ -194,6 +206,11 @@ const pad = (n: number) => String(n).padStart(2, '0')
   margin-top: 1rem;
   font-size: 14px;
   color: var(--text-sub);
+}
+
+.oss-fallback {
+  font-weight: 700;
+  color: var(--ink);
 }
 
 .oss-list {
