@@ -1,99 +1,108 @@
 <template>
-  <div
-    ref="containerRef"
-    class="w-full max-w-4xl mx-auto"
-  >
-    <div class="flex items-center justify-end mb-4">
-      <UTooltip
-        v-model:open="tooltipOpen"
-        :delay-duration="100"
-        :ui="{
-          content: '!bg-[#f6f6f4] border border-[#111] !rounded-none !shadow-none !ring-0'
-        }"
-        :content="{ sideOffset: 8 }"
-      >
-        <template #content>
-          <div class="space-y-1.5 text-xs p-3 bg-[#f6f6f4] text-[#55555a]">
-            <div><span class="tabular-nums font-semibold text-[#111]">100%</span>：責任者（設計/実装/運用/障害対応/育成）</div>
-            <div><span class="tabular-nums font-semibold text-[#111]">80%</span>：主担当〜リード（意思決定）</div>
-            <div><span class="tabular-nums font-semibold text-[#111]">60%</span>：実務で安定して使える</div>
-            <div><span class="tabular-nums font-semibold text-[#111]">40%</span>：部分的に扱える</div>
-            <div><span class="tabular-nums font-semibold text-[#111]">20%</span>：触った程度</div>
-          </div>
-        </template>
-        <button
-          type="button"
-          class="inline-flex items-center gap-1.5 text-xs text-[#55555a] hover:text-[#1d4ed8] transition-colors group"
-          @click="tooltipOpen = !tooltipOpen"
+  <div class="w-full">
+    <!-- 専門: 説明は付けず、アイコンと名前だけを大きく出す（実績は自己紹介と OSS の節で見せる） -->
+    <div
+      class="reveal"
+      data-idx="1"
+    >
+      <p class="text-[11px] font-bold tracking-[0.12em] text-[#111] mb-4">
+        専門
+      </p>
+      <ul class="flex flex-col sm:flex-row border-y-[1.5px] border-[#111]">
+        <li
+          v-for="tech in specialties"
+          :key="tech.name"
+          class="flex-1 flex sm:flex-col items-center sm:items-start gap-4 py-6 sm:px-6 sm:first:pl-0"
         >
-          <span
-            class="w-4 h-4 border border-[#111] flex items-center justify-center text-[10px] font-semibold group-hover:border-[#1d4ed8]"
-          >i</span>
-          <span>数値の見方</span>
-        </button>
-      </UTooltip>
+          <UIcon
+            :name="tech.icon"
+            class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 text-[#111]"
+          />
+          <span class="text-4xl sm:text-[clamp(28px,4vw,44px)] font-black tracking-[-0.02em] text-[#111]">
+            {{ tech.name }}
+          </span>
+        </li>
+      </ul>
     </div>
 
-    <div class="space-y-6">
-      <TechStackItem
-        v-for="(tech, index) in technologies"
-        :key="tech.name"
-        :tech="tech"
-        :index="index"
-        :is-visible="isVisible"
-      />
+    <!-- あわせて使う技術: 分野ごとにアイコンと名前を並べる -->
+    <div
+      class="reveal mt-14"
+      data-idx="2"
+    >
+      <p class="text-[11px] font-bold tracking-[0.12em] text-[#111] mb-2">
+        あわせて使う技術
+      </p>
+      <dl>
+        <div
+          v-for="group in others"
+          :key="group.label"
+          class="grid sm:grid-cols-[200px_1fr] gap-2.5 sm:gap-6 py-4 border-b border-[rgba(17,17,17,0.15)] last:border-b-0"
+        >
+          <dt class="text-[15px] font-bold text-[#111] sm:pt-2">
+            {{ group.label }}
+          </dt>
+          <dd class="flex flex-wrap gap-2.5">
+            <span
+              v-for="tech in group.items"
+              :key="tech.name"
+              class="inline-flex items-center gap-2 border-[1.5px] border-[#111] px-3.5 py-2 text-sm text-[#111]"
+            >
+              <UIcon
+                :name="tech.icon"
+                class="w-4 h-4 shrink-0"
+              />
+              {{ tech.name }}
+            </span>
+          </dd>
+        </div>
+      </dl>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const containerRef = ref(null)
-const isVisible = ref(false)
-const tooltipOpen = ref(false)
+// アイコンは simple-icons（各ブランドのロゴを単色にしたもの）から取る
+interface Tech {
+  name: string
+  icon: string
+}
 
-const technologies = [
-  { name: 'Vue.js', percentage: 80 },
-  { name: 'Nuxt', percentage: 80 },
-  { name: 'TypeScript', percentage: 70 },
-  { name: 'Laravel', percentage: 80 },
-  { name: 'MySQL', percentage: 65 },
-  { name: 'PostgreSQL', percentage: 60 },
-  { name: 'Docker', percentage: 70 },
-  { name: 'AWS', percentage: 70 },
-  { name: 'Test（Vitest / Testing Library / Playwright）', percentage: 75 },
-  { name: 'CI/CD（GitHub Actions）', percentage: 75 }
+interface TechGroup {
+  label: string
+  items: Tech[]
+}
+
+const specialties: Tech[] = [
+  { name: 'Vue.js', icon: 'i-simple-icons-vuedotjs' },
+  { name: 'Nuxt', icon: 'i-simple-icons-nuxt' },
+  { name: 'TypeScript', icon: 'i-simple-icons-typescript' }
 ]
 
-let observer: IntersectionObserver | null = null
-
-onMounted(() => {
-  if (import.meta.client && containerRef.value) {
-    observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !isVisible.value) {
-            isVisible.value = true
-            // 一度表示されたら監視を停止
-            if (observer && containerRef.value) {
-              observer.unobserve(containerRef.value)
-            }
-          }
-        })
-      },
-      {
-        threshold: 0.2,
-        rootMargin: '0px 0px -100px 0px'
-      }
-    )
-
-    observer.observe(containerRef.value)
+const others: TechGroup[] = [
+  { label: 'バックエンド', items: [{ name: 'Laravel', icon: 'i-simple-icons-laravel' }] },
+  {
+    label: 'データベース',
+    items: [
+      { name: 'MySQL', icon: 'i-simple-icons-mysql' },
+      { name: 'PostgreSQL', icon: 'i-simple-icons-postgresql' }
+    ]
+  },
+  {
+    label: 'テスト',
+    items: [
+      { name: 'Vitest', icon: 'i-simple-icons-vitest' },
+      { name: 'Testing Library', icon: 'i-simple-icons-testinglibrary' },
+      { name: 'Playwright', icon: 'i-simple-icons-playwright' }
+    ]
+  },
+  {
+    label: 'インフラ / CI',
+    items: [
+      { name: 'Docker', icon: 'i-simple-icons-docker' },
+      { name: 'AWS', icon: 'i-simple-icons-amazonwebservices' },
+      { name: 'GitHub Actions', icon: 'i-simple-icons-githubactions' }
+    ]
   }
-})
-
-onUnmounted(() => {
-  if (observer && containerRef.value) {
-    observer.unobserve(containerRef.value)
-    observer.disconnect()
-  }
-})
+]
 </script>
